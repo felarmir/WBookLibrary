@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  BookItem.h
 //  WBookLibrary
 //
 //  Created by Denis Andreev on 20/02/2017.
@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+@interface BookItem : NSCollectionViewItem
 
+@property (weak) IBOutlet NSImageView *bookCover;
 
 @end
-

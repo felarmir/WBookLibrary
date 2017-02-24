@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		C3EF0EDB1E5B67AE002917F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */; };
 		C3EF0EDE1E5B67AE002917F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EDD1E5B67AE002917F7 /* main.m */; };
-		C3EF0EE11E5B67AE002917F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EE01E5B67AE002917F7 /* ViewController.m */; };
 		C3EF0EE41E5B67AE002917F7 /* WBookLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EE21E5B67AE002917F7 /* WBookLibrary.xcdatamodeld */; };
 		C3EF0EE61E5B67AE002917F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3EF0EE51E5B67AE002917F7 /* Assets.xcassets */; };
 		C3EF0EE91E5B67AE002917F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3EF0EE71E5B67AE002917F7 /* Main.storyboard */; };
+		C3EF0EF21E5B683D002917F7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EF11E5B683D002917F7 /* MainViewController.m */; };
+		C3EF0EF61E5B686A002917F7 /* BookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EF41E5B686A002917F7 /* BookItem.m */; };
+		C3EF0EF71E5B686A002917F7 /* BookItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3EF0EF51E5B686A002917F7 /* BookItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +22,15 @@
 		C3EF0ED91E5B67AD002917F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C3EF0EDD1E5B67AE002917F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C3EF0EDF1E5B67AE002917F7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C3EF0EE01E5B67AE002917F7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C3EF0EE31E5B67AE002917F7 /* WBookLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WBookLibrary.xcdatamodel; sourceTree = "<group>"; };
 		C3EF0EE51E5B67AE002917F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3EF0EE81E5B67AE002917F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C3EF0EEA1E5B67AE002917F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3EF0EF01E5B683D002917F7 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		C3EF0EF11E5B683D002917F7 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		C3EF0EF31E5B686A002917F7 /* BookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookItem.h; sourceTree = "<group>"; };
+		C3EF0EF41E5B686A002917F7 /* BookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookItem.m; sourceTree = "<group>"; };
+		C3EF0EF51E5B686A002917F7 /* BookItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +65,16 @@
 			children = (
 				C3EF0ED91E5B67AD002917F7 /* AppDelegate.h */,
 				C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */,
-				C3EF0EDF1E5B67AE002917F7 /* ViewController.h */,
-				C3EF0EE01E5B67AE002917F7 /* ViewController.m */,
 				C3EF0EE51E5B67AE002917F7 /* Assets.xcassets */,
 				C3EF0EE71E5B67AE002917F7 /* Main.storyboard */,
 				C3EF0EEA1E5B67AE002917F7 /* Info.plist */,
 				C3EF0EE21E5B67AE002917F7 /* WBookLibrary.xcdatamodeld */,
 				C3EF0EDC1E5B67AE002917F7 /* Supporting Files */,
+				C3EF0EF01E5B683D002917F7 /* MainViewController.h */,
+				C3EF0EF11E5B683D002917F7 /* MainViewController.m */,
+				C3EF0EF31E5B686A002917F7 /* BookItem.h */,
+				C3EF0EF41E5B686A002917F7 /* BookItem.m */,
+				C3EF0EF51E5B686A002917F7 /* BookItem.xib */,
 			);
 			path = WBookLibrary;
 			sourceTree = "<group>";
@@ -138,6 +146,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3EF0EF71E5B686A002917F7 /* BookItem.xib in Resources */,
 				C3EF0EE61E5B67AE002917F7 /* Assets.xcassets in Resources */,
 				C3EF0EE91E5B67AE002917F7 /* Main.storyboard in Resources */,
 			);
@@ -151,9 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3EF0EE41E5B67AE002917F7 /* WBookLibrary.xcdatamodeld in Sources */,
-				C3EF0EE11E5B67AE002917F7 /* ViewController.m in Sources */,
 				C3EF0EDE1E5B67AE002917F7 /* main.m in Sources */,
 				C3EF0EDB1E5B67AE002917F7 /* AppDelegate.m in Sources */,
+				C3EF0EF61E5B686A002917F7 /* BookItem.m in Sources */,
+				C3EF0EF21E5B683D002917F7 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
