@@ -40,7 +40,16 @@
     [pdfImg setCurrentPage:0];
     NSImage *fpageImage = [[NSImage alloc] init];
     [fpageImage addRepresentation:pdfImg];
-    return fpageImage;
+    
+    NSImage *smallImage = [[NSImage alloc]initWithSize:NSMakeSize(130, 170)];
+    NSSize originalSize = [fpageImage size];
+    NSRect fromRect = NSMakeRect(0, 0, originalSize.width, originalSize.height);
+    [smallImage lockFocus];
+    [fpageImage drawInRect:NSMakeRect(0, 0, 130, 170) fromRect:fromRect operation:NSCompositingOperationCopy fraction:1.0f];
+    [smallImage unlockFocus];
+    
+    
+    return smallImage;
 }
 
 -(NSArray*) readFolder {
