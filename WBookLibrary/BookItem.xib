@@ -19,15 +19,17 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4F-HU-dfb">
-                    <rect key="frame" x="0.0" y="0.0" width="140" height="185"/>
+                    <rect key="frame" x="4" y="6" width="134" height="170"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="bookCover" id="4tM-7K-8q7"/>
                 </imageView>
             </subviews>
             <constraints>
-                <constraint firstItem="j4F-HU-dfb" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Cm6-lY-KLP"/>
-                <constraint firstAttribute="bottom" secondItem="j4F-HU-dfb" secondAttribute="bottom" id="J7V-W6-9XP"/>
-                <constraint firstAttribute="trailing" secondItem="j4F-HU-dfb" secondAttribute="trailing" id="L8C-l2-ecR"/>
-                <constraint firstItem="j4F-HU-dfb" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="e6c-7P-66V"/>
+                <constraint firstItem="j4F-HU-dfb" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" constant="1" id="CRD-p2-eoI"/>
+                <constraint firstItem="j4F-HU-dfb" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="9" id="Cm6-lY-KLP"/>
+                <constraint firstAttribute="bottom" secondItem="j4F-HU-dfb" secondAttribute="bottom" constant="6" id="J7V-W6-9XP"/>
+                <constraint firstAttribute="trailing" secondItem="j4F-HU-dfb" secondAttribute="trailing" constant="2" id="L8C-l2-ecR"/>
+                <constraint firstItem="j4F-HU-dfb" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" constant="1.5" id="Ut9-yk-2Lc"/>
+                <constraint firstItem="j4F-HU-dfb" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="4" id="e6c-7P-66V"/>
             </constraints>
             <point key="canvasLocation" x="-253" y="-163.5"/>
         </customView>

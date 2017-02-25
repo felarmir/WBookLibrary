@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="11762"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +25,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="iWK-fV-We7" kind="modal" id="uiL-AG-MkH"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -702,7 +708,7 @@
                                     <rect key="frame" x="1" y="1" width="478" height="268"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView id="dg6-Sz-hkN">
+                                        <collectionView selectable="YES" id="dg6-Sz-hkN">
                                             <rect key="frame" x="0.0" y="0.0" width="478" height="268"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="4sN-3b-kGe">
@@ -735,10 +741,101 @@
                             <constraint firstAttribute="trailing" secondItem="LyB-1o-Cr7" secondAttribute="trailing" id="i4h-Wk-Anw"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="dg6-Sz-hkN" id="hUA-Dp-tGi"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
+        </scene>
+        <!--User Preference-->
+        <scene sceneID="SHy-en-eX8">
+            <objects>
+                <viewController id="iWK-fV-We7" customClass="UserPreference" sceneMemberID="viewController">
+                    <view key="view" id="QkM-Eb-WnU">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box title="Book Library Path:" translatesAutoresizingMaskIntoConstraints="NO" id="9D8-Jc-JUK">
+                                <rect key="frame" x="17" y="218" width="341" height="64"/>
+                                <view key="contentView" id="bcz-3d-gKT">
+                                    <rect key="frame" x="2" y="2" width="337" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1P-zi-xLe">
+                                            <rect key="frame" x="8" y="-3" width="320" height="47"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="FVP-dU-05o">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="h5w-cJ-WOd"/>
+                                </constraints>
+                                <font key="titleFont" size="13" name=".AppleSystemUIFont"/>
+                            </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EkF-ao-ntg">
+                                <rect key="frame" x="358" y="258" width="77" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67" id="4il-mD-QVL"/>
+                                    <constraint firstAttribute="height" constant="18" id="Q4l-f9-4xm"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Change..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ehb-qR-jVl">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectFolder:" target="iWK-fV-We7" id="QJv-GZ-5gQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="EkF-ao-ntg" firstAttribute="top" secondItem="QkM-Eb-WnU" secondAttribute="top" constant="18" id="ARF-3M-F88"/>
+                            <constraint firstAttribute="trailing" secondItem="EkF-ao-ntg" secondAttribute="trailing" constant="20" id="Squ-68-Rbo"/>
+                            <constraint firstItem="9D8-Jc-JUK" firstAttribute="leading" secondItem="QkM-Eb-WnU" secondAttribute="leading" constant="20" id="Vcf-3L-tjd"/>
+                            <constraint firstItem="9D8-Jc-JUK" firstAttribute="top" secondItem="QkM-Eb-WnU" secondAttribute="top" constant="18" id="phb-vk-0TV"/>
+                            <constraint firstItem="EkF-ao-ntg" firstAttribute="leading" secondItem="9D8-Jc-JUK" secondAttribute="trailing" constant="8" id="zXm-pq-1iS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pathField" destination="C1P-zi-xLe" id="JFw-pQ-ehD"/>
+                    </connections>
+                </viewController>
+                <customObject id="2VV-vE-MrZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566" y="220"/>
+        </scene>
+        <!--Viewer-->
+        <scene sceneID="2y5-3a-KnE">
+            <objects>
+                <viewController storyboardIdentifier="PDFViewer" id="S5Z-pu-73S" customClass="PDFViewer" sceneMemberID="viewController">
+                    <view key="view" id="UNS-YS-RqZ">
+                        <rect key="frame" x="0.0" y="0.0" width="493" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <pdfView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81C-Dz-8PV">
+                                <rect key="frame" x="0.0" y="0.0" width="493" height="270"/>
+                            </pdfView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="81C-Dz-8PV" secondAttribute="bottom" id="Jhb-U6-Vf3"/>
+                            <constraint firstItem="81C-Dz-8PV" firstAttribute="top" secondItem="UNS-YS-RqZ" secondAttribute="top" id="KRg-IV-FnW"/>
+                            <constraint firstAttribute="trailing" secondItem="81C-Dz-8PV" secondAttribute="trailing" id="PbC-wR-TWy"/>
+                            <constraint firstItem="81C-Dz-8PV" firstAttribute="leading" secondItem="UNS-YS-RqZ" secondAttribute="leading" id="z8D-MK-9jO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pdfView" destination="81C-Dz-8PV" id="LYd-bM-xgg"/>
+                    </connections>
+                </viewController>
+                <customObject id="lm0-WM-Ep2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="587.5" y="655"/>
         </scene>
     </scenes>
 </document>

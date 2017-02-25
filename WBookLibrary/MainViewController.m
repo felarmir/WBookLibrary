@@ -8,8 +8,10 @@
 
 #import "MainViewController.h"
 #import "BookItem.h"
+#import "PDFViewer.h"
+#import "DataConfigLoader.h"
 
-@interface MainViewController ()
+@interface MainViewController ()<DataConfigLoaderDelegate>
 
 @end
 
@@ -17,15 +19,17 @@
 {
     NSArray *bookList;
     NSString *filesDirectory;
+    DataConfigLoader *dataConfig;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    dataConfig = [DataConfigLoader singleInstance]; // get settings object
+    [[DataConfigLoader singleInstance] setDelegate:self];
     NSNib *bookItem = [[NSNib alloc] initWithNibNamed:@"BookItem" bundle:nil];
     [_collectionView registerNib:bookItem forItemWithIdentifier:@"BookItem"];
     
-    filesDirectory = @"/Volumes/DartDionis/Books/Objective-C";
+    filesDirectory = [dataConfig getBookPath];
     bookList = [self readFolder];
     
 }
@@ -54,6 +58,21 @@
     BookItem *item = [collectionView makeItemWithIdentifier:@"BookItem" forIndexPath:indexPath];
     [item.bookCover setImage:[self getFirstPage:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:indexPath.item]]]];
     return item;
+}
+
+-(void)collectionView:(NSCollectionView *)collectionView didSelectItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths {
+    NSInteger item = indexPaths.anyObject.item;
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    PDFViewer *pdfv = [storyboard instantiateControllerWithIdentifier:@"PDFViewer"];
+    [pdfv setBookURL:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:item]]];
+    [self presentViewControllerAsModalWindow:pdfv];
+}
+
+-(void)changeData {
+    bookList = nil;
+    filesDirectory = [dataConfig getBookPath];
+    bookList = [self readFolder];
+    [self.collectionView reloadData];
 }
 
 @end
