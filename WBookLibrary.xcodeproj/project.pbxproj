@@ -10,6 +10,7 @@
 		C31F33A81E603AA00059DBA3 /* PDFViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33A71E603AA00059DBA3 /* PDFViewer.m */; };
 		C31F33AB1E6048BB0059DBA3 /* UserPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33AA1E6048BB0059DBA3 /* UserPreference.m */; };
 		C31F33AE1E61721F0059DBA3 /* DataConfigLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33AD1E61721F0059DBA3 /* DataConfigLoader.m */; };
+		C3C141BA1E63542A00CBF651 /* BookLibToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C141B91E63542A00CBF651 /* BookLibToolBar.m */; };
 		C3EF0EDB1E5B67AE002917F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */; };
 		C3EF0EDE1E5B67AE002917F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EDD1E5B67AE002917F7 /* main.m */; };
 		C3EF0EE41E5B67AE002917F7 /* WBookLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EE21E5B67AE002917F7 /* WBookLibrary.xcdatamodeld */; };
@@ -27,6 +28,8 @@
 		C31F33AA1E6048BB0059DBA3 /* UserPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreference.m; sourceTree = "<group>"; };
 		C31F33AC1E61721F0059DBA3 /* DataConfigLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConfigLoader.h; sourceTree = "<group>"; };
 		C31F33AD1E61721F0059DBA3 /* DataConfigLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataConfigLoader.m; sourceTree = "<group>"; };
+		C3C141B81E63542A00CBF651 /* BookLibToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookLibToolBar.h; sourceTree = "<group>"; };
+		C3C141B91E63542A00CBF651 /* BookLibToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookLibToolBar.m; sourceTree = "<group>"; };
 		C3EF0ED61E5B67AD002917F7 /* WBookLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WBookLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EF0ED91E5B67AD002917F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				C31F33AA1E6048BB0059DBA3 /* UserPreference.m */,
 				C31F33AC1E61721F0059DBA3 /* DataConfigLoader.h */,
 				C31F33AD1E61721F0059DBA3 /* DataConfigLoader.m */,
+				C3C141B81E63542A00CBF651 /* BookLibToolBar.h */,
+				C3C141B91E63542A00CBF651 /* BookLibToolBar.m */,
 			);
 			path = WBookLibrary;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3C141BA1E63542A00CBF651 /* BookLibToolBar.m in Sources */,
 				C3EF0EE41E5B67AE002917F7 /* WBookLibrary.xcdatamodeld in Sources */,
 				C3EF0EDE1E5B67AE002917F7 /* main.m in Sources */,
 				C31F33A81E603AA00059DBA3 /* PDFViewer.m in Sources */,

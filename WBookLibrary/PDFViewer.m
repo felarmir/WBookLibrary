@@ -16,7 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setFrameSize:NSMakeSize(800.0, 600.0)];
     
     NSURL *url = [NSURL fileURLWithPath:_bookURL];
     PDFDocument *pdfDoc = [[PDFDocument alloc] initWithURL:url];

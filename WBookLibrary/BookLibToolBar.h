@@ -10,4 +10,6 @@
 
 @interface BookLibToolBar : NSToolbar
 
+-(IBAction)loadBookLibrary:(id)sender;
+
 @end

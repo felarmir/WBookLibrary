@@ -10,6 +10,7 @@
 #import "BookItem.h"
 #import "PDFViewer.h"
 #import "DataConfigLoader.h"
+#import "AppDelegate.h"
 
 @interface MainViewController ()<DataConfigLoaderDelegate>
 
@@ -20,10 +21,13 @@
     NSArray *bookList;
     NSString *filesDirectory;
     DataConfigLoader *dataConfig;
+    AppDelegate *appDeleagte;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    appDeleagte = [[NSApplication sharedApplication] delegate];
     dataConfig = [DataConfigLoader singleInstance]; // get settings object
     [[DataConfigLoader singleInstance] setDelegate:self];
     NSNib *bookItem = [[NSNib alloc] initWithNibNamed:@"BookItem" bundle:nil];
@@ -31,6 +35,10 @@
     
     filesDirectory = [dataConfig getBookPath];
     bookList = [self readFolder];
+
+}
+
+-(void)resizeWindow {
     
 }
 
@@ -74,8 +82,9 @@
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     PDFViewer *pdfv = [storyboard instantiateControllerWithIdentifier:@"PDFViewer"];
     [pdfv setBookURL:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:item]]];
-    [self presentViewControllerAsModalWindow:pdfv];
+    appDeleagte.window.contentViewController = pdfv;
 }
+
 
 -(void)changeData {
     bookList = nil;

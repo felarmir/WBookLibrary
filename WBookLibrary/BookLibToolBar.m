@@ -7,7 +7,19 @@
 //
 
 #import "BookLibToolBar.h"
+#import "MainViewController.h"
+#import "AppDelegate.h"
 
 @implementation BookLibToolBar
+{
+    AppDelegate *appDelegate;
+}
+
+-(IBAction)loadBookLibrary:(id)sender {
+    appDelegate = [[NSApplication sharedApplication] delegate];
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    MainViewController *mainView = [storyboard instantiateControllerWithIdentifier:@"MainViewController"];
+    appDelegate.window.contentViewController = mainView;
+}
 
 @end
