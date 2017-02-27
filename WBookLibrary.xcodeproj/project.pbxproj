@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -144,7 +144,7 @@
 				};
 			};
 			buildConfigurationList = C3EF0ED11E5B67AD002917F7 /* Build configuration list for PBXProject "WBookLibrary" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -300,6 +300,7 @@
 				DEVELOPMENT_TEAM = PP7FFEG287;
 				INFOPLIST_FILE = WBookLibrary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wiirlock.WBookLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -313,6 +314,7 @@
 				DEVELOPMENT_TEAM = PP7FFEG287;
 				INFOPLIST_FILE = WBookLibrary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wiirlock.WBookLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

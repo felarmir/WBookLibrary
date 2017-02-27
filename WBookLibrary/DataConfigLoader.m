@@ -9,6 +9,8 @@
 #import "DataConfigLoader.h"
 
 #define BOOK_LIBRARY_PATH @"booklibrarypath"
+#define WINDOW_HEIGHT @"windowheight"
+#define WINDOW_WIDTH @"windowwidth"
 
 
 @implementation DataConfigLoader
@@ -52,6 +54,13 @@
     }
 }
 
+-(void)setWindowSize:(CGSize)windowSize {
+    [_userDefaults setFloat:windowSize.height forKey:WINDOW_HEIGHT];
+    [_userDefaults setFloat:windowSize.width forKey:WINDOW_WIDTH];
+}
 
+-(CGSize)getFrameWindowSize {
+    return CGSizeMake([_userDefaults floatForKey:WINDOW_WIDTH], [_userDefaults floatForKey:WINDOW_HEIGHT]);
+}
 
 @end

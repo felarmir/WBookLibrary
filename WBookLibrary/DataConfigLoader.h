@@ -23,5 +23,7 @@
 
 -(NSString*)getBookPath;
 -(void)setBookPath:(NSString*)path;
+-(void)setWindowSize:(CGSize)windowSize;
+-(CGSize)getFrameWindowSize;
 
 @end

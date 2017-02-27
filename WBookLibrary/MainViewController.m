@@ -28,18 +28,29 @@
     [super viewDidLoad];
     
     appDeleagte = [[NSApplication sharedApplication] delegate];
+    [appDeleagte.window setTitle:@"WBook Library Catalog"];
     dataConfig = [DataConfigLoader singleInstance]; // get settings object
-    [[DataConfigLoader singleInstance] setDelegate:self];
+    [dataConfig setDelegate:self];
+    CGSize wsize = [dataConfig getFrameWindowSize];
+    if (wsize.height == 0) {
+        wsize = CGSizeMake(600, 600);
+        [self.view setFrameSize:wsize];
+    } else {
+        [self.view setFrameSize:wsize];
+    }
+    
     NSNib *bookItem = [[NSNib alloc] initWithNibNamed:@"BookItem" bundle:nil];
     [_collectionView registerNib:bookItem forItemWithIdentifier:@"BookItem"];
     
     filesDirectory = [dataConfig getBookPath];
     bookList = [self readFolder];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDeleagte.window];
 }
 
+
 -(void)resizeWindow {
-    
+    [[DataConfigLoader singleInstance] setWindowSize:self.view.frame.size];
 }
 
 -(NSImage*) getFirstPage:(NSString*)filePath {
