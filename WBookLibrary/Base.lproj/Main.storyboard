@@ -696,8 +696,8 @@
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="8eW-9H-BK7"/>
                                 <toolbarItem reference="0IK-CR-Uy4"/>
-                                <toolbarItem reference="flF-if-e9U"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
@@ -854,6 +854,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="booklib" width="64" height="64"/>
+        <image name="booklib" width="256" height="256"/>
     </resources>
 </document>

@@ -10,6 +10,6 @@
 
 @interface BookItem : NSCollectionViewItem
 
-@property (weak) IBOutlet NSImageView *bookCover;
+@property (weak) IBOutlet NSTextField *bookName;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "BookItem.h"
+#import "BookItemView.h"
 #import "PDFViewer.h"
 #import "DataConfigLoader.h"
 #import "AppDelegate.h"
@@ -53,22 +54,9 @@
     [[DataConfigLoader singleInstance] setWindowSize:self.view.frame.size];
 }
 
--(NSImage*) getFirstPage:(NSString*)filePath {
-    NSData *pdfData = [NSData dataWithContentsOfFile:filePath];
-    NSPDFImageRep *pdfImg = [NSPDFImageRep imageRepWithData:pdfData];
-    [pdfImg setCurrentPage:0];
-    NSImage *fpageImage = [[NSImage alloc] init];
-    [fpageImage addRepresentation:pdfImg];
-    
-    NSImage *smallImage = [[NSImage alloc]initWithSize:NSMakeSize(130, 170)];
-    NSSize originalSize = [fpageImage size];
-    NSRect fromRect = NSMakeRect(0, 0, originalSize.width, originalSize.height);
-    [smallImage lockFocus];
-    [fpageImage drawInRect:NSMakeRect(0, 0, 130, 170) fromRect:fromRect operation:NSCompositingOperationCopy fraction:1.0f];
-    [smallImage unlockFocus];
-    
-    
-    return smallImage;
+-(NSString*) getFileAttributeName:(NSString*)filePath {
+    PDFDocument *pdfDoc = [[PDFDocument alloc] initWithURL:[NSURL fileURLWithPath:filePath]];
+    return [[pdfDoc documentAttributes] objectForKey:@"Title"];
 }
 
 -(NSArray*) readFolder {
@@ -84,7 +72,25 @@
 
 -(NSCollectionViewItem*)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     BookItem *item = [collectionView makeItemWithIdentifier:@"BookItem" forIndexPath:indexPath];
-    [item.bookCover setImage:[self getFirstPage:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:indexPath.item]]]];
+    
+    if ((indexPath.item % 2) == 0) {
+        NSColor *start = [NSColor colorWithRed:153.0/255.0
+                                         green:26.0/255.0 blue:61.0/255.0 alpha:1.0];
+        NSColor *end = [NSColor colorWithRed:45.0/255.0
+                                       green:45.0/255.0 blue:225.0/255.0 alpha:1.0];
+        [(BookItemView*)item.view setStartColor:start];
+        [(BookItemView*)item.view setEndColor:end];
+    } else {
+        NSColor *start = [NSColor colorWithRed:103.0/255.0
+                                         green:36.0/255.0 blue:51.0/255.0 alpha:1.0];        
+        NSColor *end = [NSColor colorWithRed:60/255.0
+                                       green:60.0/255.0 blue:200.0/255.0 alpha:1.0];
+        [(BookItemView*)item.view setStartColor:start];
+        [(BookItemView*)item.view setEndColor:end];
+    }
+    
+    [item.bookName setStringValue:[self getFileAttributeName:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:indexPath.item]]]];
+    
     return item;
 }
 
@@ -93,6 +99,7 @@
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     PDFViewer *pdfv = [storyboard instantiateControllerWithIdentifier:@"PDFViewer"];
     [pdfv setBookURL:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:item]]];
+    
     appDeleagte.window.contentViewController = pdfv;
 }
 
