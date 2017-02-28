@@ -89,7 +89,12 @@
         [(BookItemView*)item.view setEndColor:end];
     }
     
-    [item.bookName setStringValue:[self getFileAttributeName:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:indexPath.item]]]];
+    NSString *tmp = [self getFileAttributeName:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:indexPath.item]]];
+    if (tmp == nil) {
+        tmp = [bookList objectAtIndex:indexPath.item];
+    }
+    
+    [item.bookName setStringValue:tmp];
     
     return item;
 }

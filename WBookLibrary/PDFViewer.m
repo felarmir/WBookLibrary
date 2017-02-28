@@ -26,8 +26,12 @@
     
     NSURL *url = [NSURL fileURLWithPath:_bookURL];
     PDFDocument *pdfDoc = [[PDFDocument alloc] initWithURL:url];
-    self.title = [[pdfDoc documentAttributes] objectForKey:@"Title"];
-    [appDelegate.window setTitle:[[pdfDoc documentAttributes] objectForKey:@"Title"]];
+    NSString *title = [[pdfDoc documentAttributes] objectForKey:@"Title"];
+    if (title == nil) {
+        title = @"unknown title";
+    }
+    self.title = title;
+    [appDelegate.window setTitle:title];
     [_pdfView setDocument:pdfDoc];
     [_pdfView setAutoScales:YES];
     
