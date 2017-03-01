@@ -10,6 +10,7 @@
 #import "BookItem.h"
 #import "BookItemView.h"
 #import "PDFViewer.h"
+#import "EPubViewController.h"
 #import "DataConfigLoader.h"
 #import "AppDelegate.h"
 
@@ -62,8 +63,15 @@
 -(NSArray*) readFolder {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSMutableArray *fileList = (NSMutableArray*)[fileManager contentsOfDirectoryAtPath:filesDirectory error:nil];
-    [fileList removeObject:@".DS_Store"];
-    return fileList;
+    NSPredicate *pdfPredicate = [NSPredicate predicateWithFormat:@"self ENDSWITH '.pdf'"];
+    NSPredicate *epubPredicate = [NSPredicate predicateWithFormat:@"self ENDSWITH '.epub'"];
+    
+    NSMutableArray *ff = [[NSMutableArray alloc] init];
+    [ff addObjectsFromArray:[fileList filteredArrayUsingPredicate:pdfPredicate]];
+    [ff addObjectsFromArray:[fileList filteredArrayUsingPredicate:epubPredicate]];
+    
+    NSLog(@"%@", ff);
+    return ff;
 }
 
 -(NSInteger)collectionView:(NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -102,10 +110,16 @@
 -(void)collectionView:(NSCollectionView *)collectionView didSelectItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths {
     NSInteger item = indexPaths.anyObject.item;
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-    PDFViewer *pdfv = [storyboard instantiateControllerWithIdentifier:@"PDFViewer"];
-    [pdfv setBookURL:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:item]]];
+    if ([[[bookList objectAtIndex:item] pathExtension] isEqualToString:@"pdf"]) {
+        PDFViewer *pdfv = [storyboard instantiateControllerWithIdentifier:@"PDFViewer"];
+        [pdfv setBookURL:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:item]]];
+        [appDeleagte.window setContentViewController:pdfv];
+    } else if([[[bookList objectAtIndex:item] pathExtension] isEqualToString:@"epub"]) {
+        EPubViewController *epubvc = [storyboard instantiateControllerWithIdentifier:@"EPubViewController"];
+        [epubvc setBookPath:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:item]]];
+        [appDeleagte.window setContentViewController:epubvc];
+    }
     
-    appDeleagte.window.contentViewController = pdfv;
 }
 
 
