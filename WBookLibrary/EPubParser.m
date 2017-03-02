@@ -14,7 +14,14 @@
     NSXMLParser *xmlPareser;
     NSMutableDictionary *epubDataInfo;
     NSString *filesPath;
+    NSString *opfFilePath;
+    
     BOOL isMetaParse;
+    BOOL isStartParseOPF;
+    BOOL isStartParsingSpine;
+    BOOL isStartManifest;
+    BOOL isManifestItems;
+    BOOL isFinishParseDocument;
 }
 
 
@@ -22,7 +29,14 @@
 -(void)epubFileLoader:(NSString*)filePath destination:(NSString*)destinationPath {
     [SSZipArchive unzipFileAtPath:filePath toDestination:destinationPath];
      NSString *metaPath = [NSString stringWithFormat:@"%@/%@", destinationPath, @"META-INF/container.xml"];
+    epubDataInfo = [[NSMutableDictionary alloc] init];
+    
     isMetaParse = false;
+    isStartParseOPF = false;
+    isManifestItems = false;
+    isStartManifest = false;
+    isFinishParseDocument = false;
+    
     filesPath = destinationPath;
     [self parseMetaInf:metaPath];
 }
@@ -38,30 +52,72 @@
     dispatch_async(reentrantAvoidanceQueue, ^{
         NSXMLParser *opfParser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:opfPath]];
         [opfParser setDelegate:self];
+        isMetaParse = true;
         [opfParser parse];
     });
-    dispatch_sync(reentrantAvoidanceQueue, ^{ });
-    
-    
+
 }
 
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
     NSLog(@"%@", parseError);
 }
 
--(void)parserDidStartDocument:(NSXMLParser *)parser {
-     NSLog(@"Parse");
-}
-
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict {
     if(!isMetaParse) {
         if ([elementName isEqualToString:@"rootfile"]) {
-            [self parseOPF:[NSString stringWithFormat:@"%@/%@", filesPath, [attributeDict objectForKey:@"full-path"]]];
-            isMetaParse = true;
-            [xmlPareser abortParsing];
+            opfFilePath = [NSString stringWithFormat:@"%@/%@", filesPath, [attributeDict objectForKey:@"full-path"]];
+                isMetaParse = true;
         }
-    } else {
-        NSLog(@"%@", attributeDict);
+    }
+    
+    if (isStartManifest) {
+        if ([elementName isEqualToString:@"manifest"]) {
+            isManifestItems = true;
+            [epubDataInfo setObject:[[NSMutableDictionary alloc] init] forKey:@"manifest"];
+        }
+        if (isManifestItems) {
+            if ([elementName isEqualToString:@"item"]) {
+                [[epubDataInfo objectForKey:@"manifest"] setValue:[NSString stringWithFormat:@"%@/%@",opfFilePath,[attributeDict objectForKey:@"href"]] forKey:[attributeDict objectForKey:@"id"]];
+            }
+        }
+    }
+    
+    if(isStartParseOPF){
+        if ([elementName isEqualToString:@"spine"]) {
+            isStartParsingSpine = true;
+            [epubDataInfo setObject:[[NSMutableArray alloc] init] forKey:@"spine"];
+        }
+        if(isStartParsingSpine) {
+            if ([elementName isEqualToString:@"itemref"]) {
+                [[epubDataInfo objectForKey:@"spine"] addObject:[attributeDict objectForKey:@"idref"]];
+            }
+        }
+        
+    }
+}
+
+-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    if([elementName isEqualToString:@"spine"]) {
+        isStartParsingSpine = false;
+    }
+    if([elementName isEqualToString:@"manifest"]) {
+        isManifestItems = false;
+    }
+    if([elementName isEqualToString:@"package"]) {
+        isFinishParseDocument = true;
+    }
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser {
+    if (!isStartParseOPF) {
+        isStartManifest = true;
+        isStartParseOPF = true;
+        [self parseOPF:opfFilePath];
+    }
+    if (isFinishParseDocument) {
+        if (_delegate && [_delegate respondsToSelector:@selector(parseFinish:)]) {
+            [_delegate performSelector:@selector(parseFinish:) withObject:epubDataInfo];
+        }
     }
 }
 

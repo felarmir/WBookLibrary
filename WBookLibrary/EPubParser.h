@@ -8,7 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol EPubParserDeleage <NSObject>
+
+-(void)parseFinish:(NSDictionary*)epubDataInfo;
+
+@end
+
 @interface EPubParser : NSObject <NSXMLParserDelegate>
+
+@property (nonatomic, assign) id<EPubParserDeleage> delegate;
 
 -(void)epubFileLoader:(NSString*)filePath destination:(NSString*)destinationPath;
 
