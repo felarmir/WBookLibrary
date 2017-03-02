@@ -55,6 +55,13 @@
         isMetaParse = true;
         [opfParser parse];
     });
+    dispatch_sync(reentrantAvoidanceQueue, ^{
+        if (isFinishParseDocument) {
+            if (_delegate && [_delegate respondsToSelector:@selector(parseFinish:)]) {
+                [_delegate performSelector:@selector(parseFinish:) withObject:epubDataInfo];
+            }
+        }
+    });
 
 }
 
@@ -77,7 +84,7 @@
         }
         if (isManifestItems) {
             if ([elementName isEqualToString:@"item"]) {
-                [[epubDataInfo objectForKey:@"manifest"] setValue:[NSString stringWithFormat:@"%@/%@",opfFilePath,[attributeDict objectForKey:@"href"]] forKey:[attributeDict objectForKey:@"id"]];
+                [[epubDataInfo objectForKey:@"manifest"] setValue:[NSString stringWithFormat:@"%@/%@",[opfFilePath stringByDeletingLastPathComponent],[attributeDict objectForKey:@"href"]] forKey:[attributeDict objectForKey:@"id"]];
             }
         }
     }
@@ -114,11 +121,7 @@
         isStartParseOPF = true;
         [self parseOPF:opfFilePath];
     }
-    if (isFinishParseDocument) {
-        if (_delegate && [_delegate respondsToSelector:@selector(parseFinish:)]) {
-            [_delegate performSelector:@selector(parseFinish:) withObject:epubDataInfo];
-        }
-    }
+    
 }
 
 

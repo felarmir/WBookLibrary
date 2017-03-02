@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 
 @interface EPubViewController : NSViewController
-@property (weak) IBOutlet WebView *epubContentView;
+@property (unsafe_unretained) IBOutlet NSTextView *epubContentView;
 
 @property (nonatomic) NSString *bookPath;
 

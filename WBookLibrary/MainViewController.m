@@ -69,8 +69,7 @@
     NSMutableArray *ff = [[NSMutableArray alloc] init];
     [ff addObjectsFromArray:[fileList filteredArrayUsingPredicate:pdfPredicate]];
     [ff addObjectsFromArray:[fileList filteredArrayUsingPredicate:epubPredicate]];
-    
-    NSLog(@"%@", ff);
+
     return ff;
 }
 
