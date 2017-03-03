@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "DataConfigLoader.h"
 
-@interface EPubViewController ()<EPubParserDeleage>
+@interface EPubViewController ()<EPubParserDeleage, WebUIDelegate, WebResourceLoadDelegate, WebFrameLoadDelegate>
 
 @end
 
@@ -21,18 +21,23 @@
     EPubParser *epubBookParser;
     NSArray *spines;
     NSDictionary *manifest;
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     appDelegate = [[NSApplication sharedApplication] delegate];
     CGSize wsize = [[DataConfigLoader singleInstance] getFrameWindowSize];
     [self.view setFrameSize:wsize];
-    
+
     epubBookParser = [[EPubParser alloc] init];
     [epubBookParser setDelegate:self];
     [epubBookParser epubFileLoader:_bookPath destination:[NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), @"dionistmp"]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDelegate.window];
+
+}
+
+-(void)resizeWindow {
+
 }
 
 -(void)parseFinish:(NSDictionary*)epubDataInfo {
@@ -43,8 +48,31 @@
 
 -(void)loadBook {
     NSURL *url = [NSURL fileURLWithPath:[manifest objectForKey:[spines objectAtIndex:2]]];
-    NSAttributedString *text = [[NSAttributedString alloc] initWithURL:url options:nil documentAttributes:nil error:nil];
-    [_epubContentView.textStorage setAttributedString:text];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    [[_epubContentView mainFrame] loadRequest:request];
+    [[_epubContentView preferences] setDefaultFontSize:20.f];
+    _epubContentView.frameLoadDelegate = self;
+
+}
+
+
+-(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
+    NSString *varMySheet = @"var mySheet = document.styleSheets[0];";
+    NSString *addCSSRule =  @"function addCSSRule(selector, newRule) {"
+    "if (mySheet.addRule) {"
+    "mySheet.addRule(selector, newRule);"								// For Internet Explorer
+    "} else {"
+    "ruleIndex = mySheet.cssRules.length;"
+    "mySheet.insertRule(selector + '{' + newRule + ';}', ruleIndex);"   // For Firefox, Chrome, etc.
+    "}"
+    "}";
+
+    [_epubContentView stringByEvaluatingJavaScriptFromString:varMySheet];
+    [_epubContentView stringByEvaluatingJavaScriptFromString:addCSSRule];
+}
+
+-(IBAction)nextPagePress:(id)sender {
+    
 }
 
 @end

@@ -10,8 +10,10 @@
 #import <WebKit/WebKit.h>
 
 @interface EPubViewController : NSViewController
-@property (unsafe_unretained) IBOutlet NSTextView *epubContentView;
+@property (weak) IBOutlet WebView *epubContentView;
 
 @property (nonatomic) NSString *bookPath;
+
+-(IBAction)nextPagePress:(id)sender;
 
 @end
