@@ -15,5 +15,6 @@
 @property (nonatomic) NSString *bookPath;
 
 -(IBAction)nextPagePress:(id)sender;
+-(IBAction)backPagePress:(id)sender;
 
 @end

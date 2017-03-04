@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="11201"/>
-        <plugIn identifier="com.apple.pdfkit.ibplugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="11762"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -406,11 +407,43 @@
                                     <nil key="identifier"/>
                                 </webPreferences>
                             </webView>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="SXD-Eo-m7E">
+                                <rect key="frame" x="402" y="126" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="V4h-ON-N2c"/>
+                                    <constraint firstAttribute="width" constant="48" id="th7-Nm-a7a"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="next" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="fAF-tS-vbP">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="nextPagePress:" target="NOl-SB-9M9" id="ffF-J5-ifI"/>
+                                </connections>
+                            </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="WpR-hC-rWn">
+                                <rect key="frame" x="0.0" y="126" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="4cG-Sn-hEF"/>
+                                    <constraint firstAttribute="width" constant="48" id="zJA-GJ-bx1"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="OIq-AJ-Wd1">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="backPagePress:" target="NOl-SB-9M9" id="ngZ-Ga-qP2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="HE6-0u-IgP" secondAttribute="bottom" id="4nG-nx-Zhi"/>
+                            <constraint firstItem="WpR-hC-rWn" firstAttribute="leading" secondItem="Pq0-VI-wId" secondAttribute="leading" id="MRh-xH-N4Z"/>
                             <constraint firstItem="HE6-0u-IgP" firstAttribute="top" secondItem="Pq0-VI-wId" secondAttribute="top" id="NNl-jj-4K2"/>
+                            <constraint firstItem="WpR-hC-rWn" firstAttribute="centerY" secondItem="Pq0-VI-wId" secondAttribute="centerY" id="Zoh-hN-Eke"/>
                             <constraint firstItem="HE6-0u-IgP" firstAttribute="leading" secondItem="Pq0-VI-wId" secondAttribute="leading" id="cLK-77-lgz"/>
+                            <constraint firstAttribute="trailing" secondItem="SXD-Eo-m7E" secondAttribute="trailing" id="ffd-Ca-TyA"/>
+                            <constraint firstItem="SXD-Eo-m7E" firstAttribute="centerY" secondItem="Pq0-VI-wId" secondAttribute="centerY" id="i0d-6R-VLr"/>
                             <constraint firstAttribute="trailing" secondItem="HE6-0u-IgP" secondAttribute="trailing" id="nSV-PZ-jfh"/>
                         </constraints>
                     </view>
@@ -424,6 +457,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="42.352939605712891" height="42.352939605712891"/>
         <image name="booklib" width="256" height="256"/>
+        <image name="next" width="42.352939605712891" height="42.352939605712891"/>
     </resources>
 </document>
