@@ -42,7 +42,7 @@
     
     epubBookParser = [[EPubParser alloc] init];
     [epubBookParser setDelegate:self];
-    [epubBookParser epubFileLoader:_bookPath destination:[NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), @"dionistmp"]];
+    [epubBookParser epubFileLoader:_bookPath destination:[NSString stringWithFormat:@"%@/%@", [[DataConfigLoader singleInstance] getBookPath], [[_bookPath lastPathComponent] stringByDeletingPathExtension]]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDelegate.window];
 
@@ -97,7 +97,6 @@
 }
 
 -(IBAction)nextPagePress:(id)sender {
-    NSLog(@"==>%i=%f == %f", spineIndex,[[[_epubContentView mainFrame] frameView] documentView].frame.size.height,self.view.bounds.size.height);
     scrollPosition += self.view.bounds.size.height;
     if([[[_epubContentView mainFrame] frameView] documentView].frame.size.height == self.view.bounds.size.height) {
         if(spineIndex < [spines count]) {

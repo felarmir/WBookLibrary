@@ -127,6 +127,12 @@
 
 -(void)finishBookLoad {
     [self changeData];
+    [_progressView setHidden:YES];
+}
+
+-(void)copyProgressStatus:(NSNumber*)progress {
+    [_progressView setHidden:NO];
+    _progressView.progressIndicator.doubleValue = [progress floatValue];
 }
 
 -(void)changeData {

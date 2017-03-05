@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ProgressView.h"
 
 @interface MainViewController : NSViewController <NSCollectionViewDelegate, NSCollectionViewDataSource>
 
 @property (weak) IBOutlet NSCollectionView *collectionView;
+@property (weak) IBOutlet ProgressView *progressView;
 
 
 @end

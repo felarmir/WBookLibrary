@@ -239,6 +239,7 @@
                             <defaultToolbarItems>
                                 <toolbarItem reference="8eW-9H-BK7"/>
                                 <toolbarItem reference="0IK-CR-Uy4"/>
+                                <toolbarItem reference="flF-if-e9U"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
@@ -289,21 +290,45 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1dV-4I-2dU" customClass="ProgressView">
+                                <rect key="frame" x="0.0" y="355" width="486" height="20"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" maxValue="1" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="41h-Dp-Yjj">
+                                        <rect key="frame" x="0.0" y="0.0" width="486" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="WIT-Gp-LMK"/>
+                                        </constraints>
+                                    </progressIndicator>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="41h-Dp-Yjj" secondAttribute="trailing" id="1gf-rI-rFj"/>
+                                    <constraint firstItem="41h-Dp-Yjj" firstAttribute="centerY" secondItem="1dV-4I-2dU" secondAttribute="centerY" id="Fla-N1-p3s"/>
+                                    <constraint firstItem="41h-Dp-Yjj" firstAttribute="leading" secondItem="1dV-4I-2dU" secondAttribute="leading" id="Wmg-LW-UiE"/>
+                                    <constraint firstAttribute="height" constant="20" id="ac3-U6-ldz"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="progressIndicator" destination="41h-Dp-Yjj" id="7A0-pT-eOT"/>
+                                </connections>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="LyB-1o-Cr7" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="2FP-qv-eh7"/>
                             <constraint firstAttribute="bottom" secondItem="LyB-1o-Cr7" secondAttribute="bottom" id="9Ez-WV-fJl"/>
                             <constraint firstItem="LyB-1o-Cr7" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="cC7-ia-o8O"/>
+                            <constraint firstAttribute="trailing" secondItem="1dV-4I-2dU" secondAttribute="trailing" id="dSl-i0-Zvy"/>
+                            <constraint firstItem="1dV-4I-2dU" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="gTu-RE-tIl"/>
+                            <constraint firstItem="1dV-4I-2dU" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="hPi-Jg-hg3"/>
                             <constraint firstAttribute="trailing" secondItem="LyB-1o-Cr7" secondAttribute="trailing" id="i4h-Wk-Anw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="dg6-Sz-hkN" id="hUA-Dp-tGi"/>
+                        <outlet property="progressView" destination="1dV-4I-2dU" id="nyC-px-Sma"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-664" y="1070"/>
+            <point key="canvasLocation" x="-655" y="1069.5"/>
         </scene>
         <!--User Preference-->
         <scene sceneID="SHy-en-eX8">

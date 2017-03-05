@@ -11,10 +11,11 @@
 @protocol LibraryViewWithDragAndDropDelegate <NSObject>
 
 -(void)finishBookLoad;
+-(void)copyProgressStatus:(NSNumber*)progress;
 
 @end
 
-@interface LibraryViewWithDragAndDrop : NSView 
+@interface LibraryViewWithDragAndDrop : NSView <NSFileManagerDelegate>
 
 @property (nonatomic, assign) id<LibraryViewWithDragAndDropDelegate> delegate;
 

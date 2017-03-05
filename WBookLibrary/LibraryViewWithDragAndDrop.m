@@ -12,6 +12,10 @@
 @implementation LibraryViewWithDragAndDrop
 {
     BOOL highlight;
+    NSString *curFile;
+    NSString *dstFile;
+    NSTimer *timer;
+    int curFileSize;
 }
 
 -(NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender {
@@ -47,15 +51,35 @@
 
 -(void)concludeDragOperation:(id<NSDraggingInfo>)sender {
     NSArray *dragFile = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-    NSString *fileName = [dragFile objectAtIndex:0];
-
-    if ([[NSFileManager defaultManager] isReadableFileAtPath:fileName]) {
-        [[NSFileManager defaultManager] copyItemAtPath:fileName toPath:[NSString stringWithFormat:@"%@/%@", [[DataConfigLoader singleInstance] getBookPath], [fileName lastPathComponent]] error:nil];
-        if (_delegate && [_delegate respondsToSelector:@selector(finishBookLoad)]) {
-            [_delegate performSelector:@selector(finishBookLoad)];
-        }
+    curFile = [dragFile objectAtIndex:0];
+    dstFile = [NSString stringWithFormat:@"%@/%@", [[DataConfigLoader singleInstance] getBookPath], [curFile lastPathComponent]];
+    curFileSize = [[[[NSFileManager defaultManager] attributesOfItemAtPath:curFile error:nil] objectForKey:@"NSFileSize"] intValue];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(checkFile) userInfo:nil repeats:YES];
+    
+    if ([[NSFileManager defaultManager] isReadableFileAtPath:curFile]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [[NSFileManager defaultManager] copyItemAtPath:curFile toPath:dstFile error:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (_delegate && [_delegate respondsToSelector:@selector(finishBookLoad)]) {
+                    [_delegate performSelector:@selector(finishBookLoad)];
+                    [timer invalidate];
+                    timer = nil;
+                    curFile = nil;
+                    dstFile = nil;
+                }
+            });
+        });
     }
     
+}
+
+-(void)checkFile {
+    int fileSize = [[[[NSFileManager defaultManager] attributesOfItemAtPath:dstFile error:nil] objectForKey:@"NSFileSize"] intValue];
+    if (_delegate && [_delegate respondsToSelector:@selector(copyProgressStatus:)]) {
+        [_delegate performSelector:@selector(copyProgressStatus:) withObject:[NSNumber numberWithFloat:((float)fileSize/(float)curFileSize)]];
+    }
+
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -67,5 +91,6 @@
         [NSBezierPath strokeRect:[self bounds]];
     }
 }
+
 
 @end
