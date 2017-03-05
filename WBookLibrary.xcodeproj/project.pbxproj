@@ -21,6 +21,7 @@
 		C393D5B31E66DACF0010F82D /* EPubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5B21E66DACF0010F82D /* EPubParser.m */; };
 		C393D5BF1E66F3600010F82D /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5BE1E66F3600010F82D /* SSZipArchive.m */; };
 		C3C141BA1E63542A00CBF651 /* BookLibToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C141B91E63542A00CBF651 /* BookLibToolBar.m */; };
+		C3ED14121E6BF7B10050900D /* LibraryViewWithDragAndDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ED14111E6BF7B10050900D /* LibraryViewWithDragAndDrop.m */; };
 		C3EF0EDB1E5B67AE002917F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */; };
 		C3EF0EDE1E5B67AE002917F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EDD1E5B67AE002917F7 /* main.m */; };
 		C3EF0EE41E5B67AE002917F7 /* WBookLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EE21E5B67AE002917F7 /* WBookLibrary.xcdatamodeld */; };
@@ -60,6 +61,8 @@
 		C393D5BE1E66F3600010F82D /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		C3C141B81E63542A00CBF651 /* BookLibToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookLibToolBar.h; sourceTree = "<group>"; };
 		C3C141B91E63542A00CBF651 /* BookLibToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookLibToolBar.m; sourceTree = "<group>"; };
+		C3ED14101E6BF7B10050900D /* LibraryViewWithDragAndDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryViewWithDragAndDrop.h; sourceTree = "<group>"; };
+		C3ED14111E6BF7B10050900D /* LibraryViewWithDragAndDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryViewWithDragAndDrop.m; sourceTree = "<group>"; };
 		C3EF0ED61E5B67AD002917F7 /* WBookLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WBookLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EF0ED91E5B67AD002917F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 				C393D5AA1E66D75F0010F82D /* EPubViewController.m */,
 				C393D5B11E66DACF0010F82D /* EPubParser.h */,
 				C393D5B21E66DACF0010F82D /* EPubParser.m */,
+				C3ED14101E6BF7B10050900D /* LibraryViewWithDragAndDrop.h */,
+				C3ED14111E6BF7B10050900D /* LibraryViewWithDragAndDrop.m */,
 			);
 			path = WBookLibrary;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				C393D5B31E66DACF0010F82D /* EPubParser.m in Sources */,
 				C3EF0EF61E5B686A002917F7 /* BookItem.m in Sources */,
 				C3EF0EF21E5B683D002917F7 /* MainViewController.m in Sources */,
+				C3ED14121E6BF7B10050900D /* LibraryViewWithDragAndDrop.m in Sources */,
 				C359119A1E66F6C70093C648 /* unzip.c in Sources */,
 				C35911991E66F6C70093C648 /* mztools.c in Sources */,
 			);

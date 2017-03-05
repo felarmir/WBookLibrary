@@ -13,8 +13,9 @@
 #import "EPubViewController.h"
 #import "DataConfigLoader.h"
 #import "AppDelegate.h"
+#import "LibraryViewWithDragAndDrop.h"
 
-@interface MainViewController ()<DataConfigLoaderDelegate>
+@interface MainViewController ()<DataConfigLoaderDelegate, LibraryViewWithDragAndDropDelegate>
 
 @end
 
@@ -28,11 +29,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     appDeleagte = [[NSApplication sharedApplication] delegate];
     [appDeleagte.window setTitle:@"WBook Library Catalog"];
     dataConfig = [DataConfigLoader singleInstance]; // get settings object
     [dataConfig setDelegate:self];
+    [(LibraryViewWithDragAndDrop*)self.view setDelegate:self];
+    
     CGSize wsize = [dataConfig getFrameWindowSize];
     if (wsize.height == 0) {
         wsize = CGSizeMake(600, 600);
@@ -54,6 +56,8 @@
 -(void)resizeWindow {
     [[DataConfigLoader singleInstance] setWindowSize:self.view.frame.size];
 }
+
+
 
 -(NSString*) getFileAttributeName:(NSString*)filePath {
     PDFDocument *pdfDoc = [[PDFDocument alloc] initWithURL:[NSURL fileURLWithPath:filePath]];
@@ -121,6 +125,9 @@
     
 }
 
+-(void)finishBookLoad {
+    [self changeData];
+}
 
 -(void)changeData {
     bookList = nil;
