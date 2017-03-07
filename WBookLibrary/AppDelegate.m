@@ -18,6 +18,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     _window = [[[NSApplication sharedApplication] windows] firstObject];
+    _window.titleVisibility = NSWindowTitleHidden;
+    _window.styleMask |= NSFullSizeContentViewWindowMask;
     
 }
 

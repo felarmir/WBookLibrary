@@ -15,6 +15,10 @@
     AppDelegate *appDelegate;
 }
 
+-(BOOL)allowsUserCustomization {
+    return NO;
+}
+
 -(IBAction)loadBookLibrary:(id)sender {
     appDelegate = [[NSApplication sharedApplication] delegate];
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];

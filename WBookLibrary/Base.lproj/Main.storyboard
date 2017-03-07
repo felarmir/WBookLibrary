@@ -215,7 +215,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="608" y="440" width="485" height="330"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="98BEE92B-6633-4632-99D3-8800860A921E" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="1KK-Xr-fO2" customClass="BookLibToolBar">
+                        <toolbar key="toolbar" implicitIdentifier="98BEE92B-6633-4632-99D3-8800860A921E" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="1KK-Xr-fO2" customClass="BookLibToolBar">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="8eW-9H-BK7"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="flF-if-e9U"/>
@@ -237,7 +237,6 @@
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="8eW-9H-BK7"/>
                                 <toolbarItem reference="0IK-CR-Uy4"/>
                                 <toolbarItem reference="flF-if-e9U"/>
                             </defaultToolbarItems>
