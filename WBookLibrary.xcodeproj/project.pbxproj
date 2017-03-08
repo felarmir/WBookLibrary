@@ -10,6 +10,7 @@
 		C31F33A81E603AA00059DBA3 /* PDFViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33A71E603AA00059DBA3 /* PDFViewer.m */; };
 		C31F33AB1E6048BB0059DBA3 /* UserPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33AA1E6048BB0059DBA3 /* UserPreference.m */; };
 		C31F33AE1E61721F0059DBA3 /* DataConfigLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33AD1E61721F0059DBA3 /* DataConfigLoader.m */; };
+		C327D5701E70795300F60B49 /* ToolBarHandlers.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D56F1E70795300F60B49 /* ToolBarHandlers.m */; };
 		C359118C1E66F5560093C648 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C393D5B81E66EE9F0010F82D /* libz.1.2.5.tbd */; };
 		C35911981E66F6C70093C648 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C35911901E66F6C70093C648 /* ioapi.c */; };
 		C35911991E66F6C70093C648 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = C35911921E66F6C70093C648 /* mztools.c */; };
@@ -20,7 +21,6 @@
 		C393D5AB1E66D75F0010F82D /* EPubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5AA1E66D75F0010F82D /* EPubViewController.m */; };
 		C393D5B31E66DACF0010F82D /* EPubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5B21E66DACF0010F82D /* EPubParser.m */; };
 		C393D5BF1E66F3600010F82D /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5BE1E66F3600010F82D /* SSZipArchive.m */; };
-		C3C141BA1E63542A00CBF651 /* BookLibToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C141B91E63542A00CBF651 /* BookLibToolBar.m */; };
 		C3ED14121E6BF7B10050900D /* LibraryViewWithDragAndDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ED14111E6BF7B10050900D /* LibraryViewWithDragAndDrop.m */; };
 		C3ED14151E6C5B920050900D /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ED14141E6C5B920050900D /* ProgressView.m */; };
 		C3EF0EDB1E5B67AE002917F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */; };
@@ -40,6 +40,8 @@
 		C31F33AA1E6048BB0059DBA3 /* UserPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreference.m; sourceTree = "<group>"; };
 		C31F33AC1E61721F0059DBA3 /* DataConfigLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConfigLoader.h; sourceTree = "<group>"; };
 		C31F33AD1E61721F0059DBA3 /* DataConfigLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataConfigLoader.m; sourceTree = "<group>"; };
+		C327D56E1E70795300F60B49 /* ToolBarHandlers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolBarHandlers.h; sourceTree = "<group>"; };
+		C327D56F1E70795300F60B49 /* ToolBarHandlers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolBarHandlers.m; sourceTree = "<group>"; };
 		C359118F1E66F6C70093C648 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = minizip/crypt.h; sourceTree = "<group>"; };
 		C35911901E66F6C70093C648 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = minizip/ioapi.c; sourceTree = "<group>"; };
 		C35911911E66F6C70093C648 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = minizip/ioapi.h; sourceTree = "<group>"; };
@@ -60,8 +62,6 @@
 		C393D5B81E66EE9F0010F82D /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		C393D5BD1E66F3600010F82D /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C393D5BE1E66F3600010F82D /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
-		C3C141B81E63542A00CBF651 /* BookLibToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookLibToolBar.h; sourceTree = "<group>"; };
-		C3C141B91E63542A00CBF651 /* BookLibToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookLibToolBar.m; sourceTree = "<group>"; };
 		C3ED14101E6BF7B10050900D /* LibraryViewWithDragAndDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryViewWithDragAndDrop.h; sourceTree = "<group>"; };
 		C3ED14111E6BF7B10050900D /* LibraryViewWithDragAndDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryViewWithDragAndDrop.m; sourceTree = "<group>"; };
 		C3ED14131E6C5B920050900D /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
@@ -163,8 +163,6 @@
 				C31F33AA1E6048BB0059DBA3 /* UserPreference.m */,
 				C31F33AC1E61721F0059DBA3 /* DataConfigLoader.h */,
 				C31F33AD1E61721F0059DBA3 /* DataConfigLoader.m */,
-				C3C141B81E63542A00CBF651 /* BookLibToolBar.h */,
-				C3C141B91E63542A00CBF651 /* BookLibToolBar.m */,
 				C393D5A91E66D75F0010F82D /* EPubViewController.h */,
 				C393D5AA1E66D75F0010F82D /* EPubViewController.m */,
 				C393D5B11E66DACF0010F82D /* EPubParser.h */,
@@ -173,6 +171,8 @@
 				C3ED14111E6BF7B10050900D /* LibraryViewWithDragAndDrop.m */,
 				C3ED14131E6C5B920050900D /* ProgressView.h */,
 				C3ED14141E6C5B920050900D /* ProgressView.m */,
+				C327D56E1E70795300F60B49 /* ToolBarHandlers.h */,
+				C327D56F1E70795300F60B49 /* ToolBarHandlers.m */,
 			);
 			path = WBookLibrary;
 			sourceTree = "<group>";
@@ -257,10 +257,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3C141BA1E63542A00CBF651 /* BookLibToolBar.m in Sources */,
 				C3EF0EE41E5B67AE002917F7 /* WBookLibrary.xcdatamodeld in Sources */,
 				C393D5BF1E66F3600010F82D /* SSZipArchive.m in Sources */,
 				C38907F51E64430700956D14 /* BookItemView.m in Sources */,
+				C327D5701E70795300F60B49 /* ToolBarHandlers.m in Sources */,
 				C3EF0EDE1E5B67AE002917F7 /* main.m in Sources */,
 				C31F33A81E603AA00059DBA3 /* PDFViewer.m in Sources */,
 				C359119B1E66F6C70093C648 /* zip.c in Sources */,

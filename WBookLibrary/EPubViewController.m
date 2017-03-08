@@ -11,14 +11,16 @@
 #import "AppDelegate.h"
 #import "DataConfigLoader.h"
 #import <Quartz/Quartz.h>
+#import "ToolBarHandlers.h"
 
-@interface EPubViewController ()<EPubParserDeleage, WebUIDelegate, WebResourceLoadDelegate, WebFrameLoadDelegate>
+@interface EPubViewController ()<EPubParserDeleage, WebUIDelegate, WebResourceLoadDelegate, WebFrameLoadDelegate, NSToolbarDelegate>
 
 @end
 
 @implementation EPubViewController
 {
     AppDelegate *appDelegate;
+    ToolBarHandlers *toolHandlers;
     EPubParser *epubBookParser;
     NSArray *spines;
     NSDictionary *manifest;
@@ -30,9 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     appDelegate = [[NSApplication sharedApplication] delegate];
+    appDelegate.window.titlebarAppearsTransparent = NO;
     CGSize wsize = [[DataConfigLoader singleInstance] getFrameWindowSize];
     [self.view setFrameSize:wsize];
-    
+    toolHandlers = [[ToolBarHandlers alloc] init];
     [[[_epubContentView mainFrame] frameView] setAllowsScrolling:NO];
     _epubContentView.frameLoadDelegate = self;
     
@@ -46,10 +49,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDelegate.window];
 
+    NSToolbar *toolBar = [[NSToolbar alloc] initWithIdentifier:@"EPubFViewToolBar"];
+    [toolBar setDelegate:self];
+    [appDelegate.window setToolbar:toolBar];
 }
 
 -(void)resizeWindow {
-
+    [[DataConfigLoader singleInstance] setWindowSize:self.view.frame.size];
 }
 
 -(void)parseFinish:(NSDictionary*)epubDataInfo {
@@ -133,6 +139,46 @@
         [[[[_epubContentView mainFrame] frameView] documentView] scrollPoint:NSMakePoint(0, scrollPosition)];
     }
 
+}
+
+- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:
+(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+{
+    
+    NSToolbarItem *newItem = nil;
+    NSButton *btn = nil;
+    
+    if([itemIdentifier isEqualToString:@"Library"]){
+        newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+        btn = [NSButton buttonWithImage:[NSImage imageNamed:@"booklib"] target:self action:@selector(returnToLibrary)];
+        [newItem setLabel:@"Library"];
+        [newItem setPaletteLabel:@"Library"];
+        
+    }
+    
+    [newItem setView:btn];
+    [btn setBezelStyle:NSRegularSquareBezelStyle];
+    [btn setFrame:NSMakeRect(0, 0, 32, 32)];
+    
+    NSSize minSize = NSMakeSize(32, 32);
+    [newItem setMaxSize:minSize];
+    return newItem;
+}
+
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+    return [NSArray arrayWithObjects:@"Library",
+            NSToolbarFlexibleSpaceItemIdentifier, nil];
+}
+
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+    return [NSArray arrayWithObjects:@"Library",
+            NSToolbarFlexibleSpaceItemIdentifier, nil];
+}
+
+-(void)returnToLibrary {
+    [toolHandlers loadCatalogue];
 }
 
 @end

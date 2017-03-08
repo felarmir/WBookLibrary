@@ -30,7 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     appDeleagte = [[NSApplication sharedApplication] delegate];
-    [appDeleagte.window setTitle:@"WBook Library Catalog"];
+    appDeleagte.window.titlebarAppearsTransparent = YES;
+    appDeleagte.window.toolbar = nil;
+    
     dataConfig = [DataConfigLoader singleInstance]; // get settings object
     [dataConfig setDelegate:self];
     [(LibraryViewWithDragAndDrop*)self.view setDelegate:self];

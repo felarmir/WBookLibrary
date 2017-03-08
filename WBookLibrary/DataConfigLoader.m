@@ -36,7 +36,6 @@
 
 -(void) createDefults {
     _userDefaults = [[NSUserDefaults alloc] init];
- //   NSString *bookPath = [_userDefaults stringForKey:BOOK_LIBRARY_PATH];
 }
 
 -(NSString*)getBookPath {
