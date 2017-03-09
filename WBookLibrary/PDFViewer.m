@@ -56,28 +56,34 @@
 {
 
     NSToolbarItem *newItem = nil;
-    NSButton *btn = nil;
+    NSButton *btn = [[NSButton alloc] init];
     
     if([itemIdentifier isEqualToString:@"Library"]){
         newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
-        btn = [NSButton buttonWithImage:[NSImage imageNamed:@"booklib"] target:self action:@selector(returnToLibrary)];
+        
+        [btn setImage:[NSImage imageNamed:@"booklib"]];
+        [btn setAction:@selector(returnToLibrary:)];
+        
         [newItem setLabel:@"Library"];
         [newItem setPaletteLabel:@"Library"];
 
     } else if([itemIdentifier isEqualToString:@"TwoPage"]){
         newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
-        btn = [NSButton buttonWithImage:[NSImage imageNamed:@"twoPage"] target:self action:@selector(setTwoPage)];
+        [btn setImage:[NSImage imageNamed:@"twoPage"]];
+        [btn setAction:@selector(setTwoPage:)];
         [newItem setLabel:@"Two Page"];
         [newItem setPaletteLabel:@"Two Page"];
         
     } else if([itemIdentifier isEqualToString:@"OnePage"]){
         newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
-        btn = [NSButton buttonWithImage:[NSImage imageNamed:@"onePage"] target:self action:@selector(setOnePage)];
+        [btn setImage:[NSImage imageNamed:@"onePage"]];
+        [btn setAction:@selector(setOnePage:)];
         [newItem setLabel:@"One Page"];
         [newItem setPaletteLabel:@"One Page"];
         
     }
     
+    [btn setImageScaling:NSImageScaleAxesIndependently];
     [newItem setView:btn];
     [btn setBezelStyle:NSRegularSquareBezelStyle];
     [btn setFrame:NSMakeRect(0, 0, 32, 32)];
@@ -101,7 +107,7 @@
             @"OnePage", @"TwoPage", nil];
 }
 
--(void)returnToLibrary {
+-(void)returnToLibrary:(id)sender {
     [toolHandlers loadCatalogue];
 }
 
@@ -109,11 +115,11 @@
     [_pdfView goToNextPage:sender];
 }
 
--(void)setTwoPage {
+-(void)setTwoPage:(id)sender {
     [_pdfView setDisplayMode:kPDFDisplayTwoUpContinuous];
 }
 
--(void)setOnePage {
+-(void)setOnePage:(id)sender {
     [_pdfView setDisplayMode:kPDFDisplaySinglePageContinuous];
 }
 

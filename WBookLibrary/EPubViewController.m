@@ -146,16 +146,20 @@
 {
     
     NSToolbarItem *newItem = nil;
-    NSButton *btn = nil;
+    NSButton *btn = [[NSButton alloc] init];
     
     if([itemIdentifier isEqualToString:@"Library"]){
         newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
-        btn = [NSButton buttonWithImage:[NSImage imageNamed:@"booklib"] target:self action:@selector(returnToLibrary)];
+        
+        [btn setImage:[NSImage imageNamed:@"booklib"]];
+        [btn setAction:@selector(returnToLibrary:)];
+        
         [newItem setLabel:@"Library"];
         [newItem setPaletteLabel:@"Library"];
         
     }
     
+    [btn setImageScaling:NSImageScaleAxesIndependently];
     [newItem setView:btn];
     [btn setBezelStyle:NSRegularSquareBezelStyle];
     [btn setFrame:NSMakeRect(0, 0, 32, 32)];
@@ -177,7 +181,7 @@
             NSToolbarFlexibleSpaceItemIdentifier, nil];
 }
 
--(void)returnToLibrary {
+-(void)returnToLibrary:(id)sender {
     [toolHandlers loadCatalogue];
 }
 
