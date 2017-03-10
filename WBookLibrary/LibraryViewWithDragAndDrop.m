@@ -84,12 +84,11 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
+    [[NSColor blackColor] set];
+    NSRectFill(dirtyRect);
+    self.layer.borderColor = [NSColor blackColor].CGColor;
+    [NSBezierPath strokeRect:[self bounds]];
     [self registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
-    if (highlight) {
-        [[NSColor grayColor] set];
-        [NSBezierPath setDefaultLineWidth:5.0];
-        [NSBezierPath strokeRect:[self bounds]];
-    }
 }
 
 

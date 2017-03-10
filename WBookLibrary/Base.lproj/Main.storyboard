@@ -232,27 +232,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="486" height="375"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyB-1o-Cr7">
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyB-1o-Cr7">
                                 <rect key="frame" x="0.0" y="0.0" width="486" height="375"/>
                                 <clipView key="contentView" drawsBackground="NO" id="0on-Tv-PhU">
-                                    <rect key="frame" x="1" y="1" width="484" height="373"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="486" height="375"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="dg6-Sz-hkN">
-                                            <rect key="frame" x="0.0" y="0.0" width="484" height="373"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="486" height="375"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="4sN-3b-kGe">
                                                 <size key="itemSize" width="140" height="185"/>
-                                                <edgeInsets key="sectionInset" left="20" right="20" top="20" bottom="10"/>
+                                                <edgeInsets key="sectionInset" left="20" right="20" top="30" bottom="10"/>
                                             </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="primaryBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="XfG-lQ-9wD" id="LhL-Zc-Dsl"/>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="JIf-lg-o8R"/>
                                             </connections>
                                         </collectionView>
                                     </subviews>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.18632552250000001" green="0.20005524420000001" blue="0.2262650698" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="eRB-fx-j9g">
                                     <rect key="frame" x="1" y="627" width="484" height="16"/>

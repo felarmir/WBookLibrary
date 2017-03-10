@@ -16,6 +16,7 @@
                                                          endingColor:_endColor];
     NSBezierPath *bpath = [NSBezierPath bezierPathWithRoundedRect:[self bounds] xRadius:0.0 yRadius:0.0];
     [gradient drawInBezierPath:bpath angle:90.0];
+    [self.layer setCornerRadius: 3.0];
 }
 
 @end

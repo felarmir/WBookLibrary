@@ -50,6 +50,11 @@
     
     filesDirectory = [dataConfig getBookPath];
     bookList = [self readFolder];
+    
+    [self.view setWantsLayer:YES];
+    self.view.layer.cornerRadius = 5.0;
+    [self.view.layer setBackgroundColor:[NSColor blackColor].CGColor];
+    
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDeleagte.window];
 }
