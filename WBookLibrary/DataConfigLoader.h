@@ -25,5 +25,9 @@
 -(void)setBookPath:(NSString*)path;
 -(void)setWindowSize:(CGSize)windowSize;
 -(CGSize)getFrameWindowSize;
+-(NSArray*)bookGroups;
+
+-(NSArray*)loadBookGroupList;
+-(void)addBookToGroup:(NSString*)group bookName:(NSString*)bookName;
 
 @end

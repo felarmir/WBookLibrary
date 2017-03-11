@@ -1,13 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BookItem">
             <connections>
                 <outlet property="bookName" destination="62N-yM-oHX" id="pQG-Wb-y7K"/>
+                <outlet property="groupBox" destination="D3a-2M-W5c" id="vCi-dl-1Ta"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -28,17 +30,34 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D3a-2M-W5c">
+                    <rect key="frame" x="7" y="78" width="129" height="26"/>
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="K8l-sw-cgC">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </comboBoxCell>
+                    <connections>
+                        <outlet property="dataSource" destination="-2" id="3i4-bI-Jte"/>
+                        <outlet property="delegate" destination="-2" id="4B0-f4-x7F"/>
+                    </connections>
+                </comboBox>
             </subviews>
             <constraints>
+                <constraint firstItem="D3a-2M-W5c" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="0xZ-b7-w6K"/>
                 <constraint firstItem="62N-yM-oHX" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="7" id="5dq-8E-hDW"/>
                 <constraint firstItem="62N-yM-oHX" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="6aR-od-kAS"/>
+                <constraint firstItem="D3a-2M-W5c" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="H0L-oV-ecp"/>
+                <constraint firstAttribute="trailing" secondItem="D3a-2M-W5c" secondAttribute="trailing" constant="7" id="NHW-8s-q8s"/>
+                <constraint firstItem="D3a-2M-W5c" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="SRA-MY-MWc"/>
                 <constraint firstAttribute="trailing" secondItem="62N-yM-oHX" secondAttribute="trailing" constant="7" id="fUV-GO-Znm"/>
             </constraints>
-            <point key="canvasLocation" x="-253" y="-163.5"/>
+            <point key="canvasLocation" x="-340" y="-172.5"/>
         </customView>
         <collectionViewItem id="g4K-g3-UqB" customClass="BookItem">
             <connections>
                 <outlet property="bookName" destination="62N-yM-oHX" id="3G0-js-TIj"/>
+                <outlet property="groupBox" destination="D3a-2M-W5c" id="lMJ-gN-YQu"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="cIK-HL-FBS"/>
             </connections>
         </collectionViewItem>

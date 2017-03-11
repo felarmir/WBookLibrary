@@ -14,6 +14,8 @@
 #import "DataConfigLoader.h"
 #import "AppDelegate.h"
 #import "LibraryViewWithDragAndDrop.h"
+#import "CollectionViewSectionHeader.h"
+#import "BookList+CoreDataClass.h"
 
 @interface MainViewController ()<DataConfigLoaderDelegate, LibraryViewWithDragAndDropDelegate>
 
@@ -21,10 +23,13 @@
 
 @implementation MainViewController
 {
-    NSArray *bookList;
     NSString *filesDirectory;
     DataConfigLoader *dataConfig;
     AppDelegate *appDeleagte;
+    BOOL isEditBookList;
+    
+    NSMutableDictionary<NSString*, NSArray*> *bookListDict;
+    NSMutableDictionary<NSString*, NSString*> *fileNameRealName;
 }
 
 - (void)viewDidLoad {
@@ -32,7 +37,7 @@
     appDeleagte = [[NSApplication sharedApplication] delegate];
     appDeleagte.window.titlebarAppearsTransparent = YES;
     appDeleagte.window.toolbar = nil;
-    
+    [_collectionView setDelegate:self];
     dataConfig = [DataConfigLoader singleInstance]; // get settings object
     [dataConfig setDelegate:self];
     [(LibraryViewWithDragAndDrop*)self.view setDelegate:self];
@@ -49,22 +54,53 @@
     [_collectionView registerNib:bookItem forItemWithIdentifier:@"BookItem"];
     
     filesDirectory = [dataConfig getBookPath];
-    bookList = [self readFolder];
+    
+    [self generateBookListArrayByGroup];
+    
+    isEditBookList = NO;
     
     [self.view setWantsLayer:YES];
     self.view.layer.cornerRadius = 5.0;
     [self.view.layer setBackgroundColor:[NSColor blackColor].CGColor];
-    
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDeleagte.window];
 }
 
-
 -(void)resizeWindow {
     [[DataConfigLoader singleInstance] setWindowSize:self.view.frame.size];
 }
+/**
+ Book list by group
+ */
+-(void)generateBookListArrayByGroup {
+    //[0"Developer", 1"Languages", 2"Fiction", 3"Science", 4"Unknown"];
+    NSArray *groupList = [[DataConfigLoader singleInstance] bookGroups];
+    NSArray *booksInDB = [[DataConfigLoader singleInstance] loadBookGroupList];
+    NSArray *bookList = [self readFolder];
+    fileNameRealName = [[NSMutableDictionary alloc] init];
+    bookListDict = [[NSMutableDictionary alloc] init];
+    
+    if ([booksInDB count] == 0) {
+        NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [bookList count]; i++) {
+            [tmpArray addObject:[self bookNameByIndex:bookList index:i]];
+            [fileNameRealName setObject:[bookList objectAtIndex:i] forKey:[self bookNameByIndex:bookList index:i]];
+        }
+        [bookListDict setObject:tmpArray forKey:[groupList lastObject]];
+    } else {
+        
+        
+    }
+}
 
-
+-(NSString*)bookNameByIndex:(NSArray*)books index:(NSInteger)index {
+    NSString *tmp = [self getFileAttributeName:[NSString stringWithFormat:@"%@/%@", filesDirectory, [books objectAtIndex:index]]];
+    
+    if (tmp == nil) {
+        tmp = [books objectAtIndex:index];
+    }
+    return tmp;
+}
 
 -(NSString*) getFileAttributeName:(NSString*)filePath {
     PDFDocument *pdfDoc = [[PDFDocument alloc] initWithURL:[NSURL fileURLWithPath:filePath]];
@@ -80,12 +116,25 @@
     NSMutableArray *ff = [[NSMutableArray alloc] init];
     [ff addObjectsFromArray:[fileList filteredArrayUsingPredicate:pdfPredicate]];
     [ff addObjectsFromArray:[fileList filteredArrayUsingPredicate:epubPredicate]];
-
     return ff;
 }
 
+// Collection View start
+
+-(NSInteger)numberOfSectionsInCollectionView:(NSCollectionView *)collectionView {
+    return [[bookListDict allKeys] count];
+}
+
 -(NSInteger)collectionView:(NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [bookList count];
+    return [[bookListDict objectForKey:[[bookListDict allKeys] objectAtIndex:section]] count];
+}
+
+-(NSView*)collectionView:(NSCollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    CollectionViewSectionHeader *header = [collectionView makeSupplementaryViewOfKind:NSCollectionElementKindSectionHeader withIdentifier:@"CollectionViewSectionHeader" forIndexPath:indexPath];
+    if ([kind isEqualToString:NSCollectionElementKindSectionHeader]) {
+        [header.headerText setStringValue:[[bookListDict allKeys] objectAtIndex:indexPath.section]];
+    }
+    return header;
 }
 
 -(NSCollectionViewItem*)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
@@ -107,30 +156,33 @@
         [(BookItemView*)item.view setEndColor:end];
     }
     
-    NSString *tmp = [self getFileAttributeName:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:indexPath.item]]];
-    if (tmp == nil) {
-        tmp = [bookList objectAtIndex:indexPath.item];
-    }
+    [item setBookEditMode:isEditBookList];
     
-    [item.bookName setStringValue:tmp];
+    [item.bookName setStringValue:[[bookListDict objectForKey:[[bookListDict allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.item]];
     
     return item;
 }
 
 -(void)collectionView:(NSCollectionView *)collectionView didSelectItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths {
     NSInteger item = indexPaths.anyObject.item;
-    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-    if ([[[bookList objectAtIndex:item] pathExtension] isEqualToString:@"pdf"]) {
-        PDFViewer *pdfv = [storyboard instantiateControllerWithIdentifier:@"PDFViewer"];
-        [pdfv setBookURL:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:item]]];
-        [appDeleagte.window setContentViewController:pdfv];
-    } else if([[[bookList objectAtIndex:item] pathExtension] isEqualToString:@"epub"]) {
-        EPubViewController *epubvc = [storyboard instantiateControllerWithIdentifier:@"EPubViewController"];
-        [epubvc setBookPath:[NSString stringWithFormat:@"%@/%@", filesDirectory, [bookList objectAtIndex:item]]];
-        [appDeleagte.window setContentViewController:epubvc];
+    if (!isEditBookList) {
+        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+        NSArray *bookArray = [bookListDict objectForKey:[[bookListDict allKeys] objectAtIndex:indexPaths.anyObject.section]];
+        NSString *fileName = [fileNameRealName objectForKey:[bookArray objectAtIndex:item]];
+        if ([[fileName pathExtension] isEqualToString:@"pdf"]) {
+            PDFViewer *pdfv = [storyboard instantiateControllerWithIdentifier:@"PDFViewer"];
+            [pdfv setBookURL:[NSString stringWithFormat:@"%@%@", filesDirectory, fileName]];
+            [appDeleagte.window setContentViewController:pdfv];
+        } else if([[fileName pathExtension] isEqualToString:@"epub"]) {
+            EPubViewController *epubvc = [storyboard instantiateControllerWithIdentifier:@"EPubViewController"];
+            [epubvc setBookPath:[NSString stringWithFormat:@"%@/%@", filesDirectory, fileName]];
+            [appDeleagte.window setContentViewController:epubvc];
+        }
     }
     
 }
+
+// collection view end
 
 -(void)finishBookLoad {
     [self changeData];
@@ -143,10 +195,22 @@
 }
 
 -(void)changeData {
-    bookList = nil;
-    filesDirectory = [dataConfig getBookPath];
-    bookList = [self readFolder];
+    [self generateBookListArrayByGroup];
     [self.collectionView reloadData];
 }
+
+-(IBAction)editBookList:(id)sender {
+    if (isEditBookList) {
+        [_editButton setTitle:@"Edit"];
+        [_editButton.layer setBackgroundColor:[NSColor clearColor].CGColor];
+    } else {
+        [_editButton setTitle:@"Editing"];
+        [_editButton.layer setBackgroundColor:[NSColor grayColor].CGColor];
+        [_editButton.layer setCornerRadius:5.0];
+    }
+    [_collectionView reloadData];
+    isEditBookList = !isEditBookList;
+}
+
 
 @end

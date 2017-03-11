@@ -243,7 +243,8 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="4sN-3b-kGe">
                                                 <size key="itemSize" width="140" height="185"/>
-                                                <edgeInsets key="sectionInset" left="20" right="20" top="30" bottom="10"/>
+                                                <size key="headerReferenceSize" width="0.0" height="40"/>
+                                                <edgeInsets key="sectionInset" left="20" right="20" top="20" bottom="10"/>
                                             </collectionViewFlowLayout>
                                             <color key="primaryBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
@@ -254,15 +255,31 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.18632552250000001" green="0.20005524420000001" blue="0.2262650698" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
+                                <edgeInsets key="contentInsets" left="0.0" right="0.0" top="30" bottom="0.0"/>
+                                <edgeInsets key="scrollerInsets" left="0.0" right="0.0" top="30" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="eRB-fx-j9g">
                                     <rect key="frame" x="1" y="627" width="484" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="YY4-1i-9Sn">
-                                    <rect key="frame" x="469" y="1" width="16" height="297"/>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="YY4-1i-9Sn">
+                                    <rect key="frame" x="470" y="60" width="16" height="315"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-nU-3j7">
+                                <rect key="frame" x="425" y="356" width="60" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="8P0-qh-8I2"/>
+                                    <constraint firstAttribute="height" constant="16" id="jVC-lH-ANB"/>
+                                </constraints>
+                                <buttonCell key="cell" type="recessed" title="Edit" bezelStyle="recessed" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cbc-nM-KVz">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                    <font key="font" metaFont="systemBold" size="12"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="editBookList:" target="XfG-lQ-9wD" id="DaV-of-7dG"/>
+                                </connections>
+                            </button>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1dV-4I-2dU" customClass="ProgressView">
                                 <rect key="frame" x="0.0" y="355" width="486" height="20"/>
                                 <subviews>
@@ -286,16 +303,19 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="LyB-1o-Cr7" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="2FP-qv-eh7"/>
+                            <constraint firstAttribute="trailing" secondItem="hWb-nU-3j7" secondAttribute="trailing" constant="1" id="5au-t9-qKV"/>
                             <constraint firstAttribute="bottom" secondItem="LyB-1o-Cr7" secondAttribute="bottom" id="9Ez-WV-fJl"/>
                             <constraint firstItem="LyB-1o-Cr7" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="cC7-ia-o8O"/>
                             <constraint firstAttribute="trailing" secondItem="1dV-4I-2dU" secondAttribute="trailing" id="dSl-i0-Zvy"/>
                             <constraint firstItem="1dV-4I-2dU" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="gTu-RE-tIl"/>
                             <constraint firstItem="1dV-4I-2dU" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="hPi-Jg-hg3"/>
                             <constraint firstAttribute="trailing" secondItem="LyB-1o-Cr7" secondAttribute="trailing" id="i4h-Wk-Anw"/>
+                            <constraint firstItem="hWb-nU-3j7" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="2" id="vLO-UV-3zB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="dg6-Sz-hkN" id="hUA-Dp-tGi"/>
+                        <outlet property="editButton" destination="hWb-nU-3j7" id="87N-EB-PRN"/>
                         <outlet property="progressView" destination="1dV-4I-2dU" id="nyC-px-Sma"/>
                     </connections>
                 </viewController>

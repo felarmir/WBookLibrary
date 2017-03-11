@@ -8,8 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface BookItem : NSCollectionViewItem
+@interface BookItem : NSCollectionViewItem <NSComboBoxDelegate, NSComboBoxDataSource>
 
 @property (weak) IBOutlet NSTextField *bookName;
+@property (weak) IBOutlet NSComboBox *groupBox;
+@property (nonatomic) NSString *groupName;
+
+-(void)setBookEditMode:(BOOL)isEdit;
 
 @end

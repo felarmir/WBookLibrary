@@ -86,12 +86,16 @@
     "}"
     "}";
     NSString *insertRule2 = [NSString stringWithFormat:@"addCSSRule('p', 'text-align: justify;')"];
+    NSString *img = [NSString stringWithFormat:@"addCSSRule('img', 'max-width: 35%%')"];
+    NSString *svg = [NSString stringWithFormat:@"addCSSRule('svg', 'max-width: 35%%')"];
     NSString *hrefStyle = @"addCSSRule('a', 'text-decoration: none;')";
     NSString *setTextSizeRule = [NSString stringWithFormat:@"addCSSRule('body', 'font-size: %d%%; padding-left:20px;padding-right:20px;')", 100];
 
     [_epubContentView stringByEvaluatingJavaScriptFromString:varMySheet];
     [_epubContentView stringByEvaluatingJavaScriptFromString:addCSSRule];
     [_epubContentView stringByEvaluatingJavaScriptFromString:insertRule2];
+    [_epubContentView stringByEvaluatingJavaScriptFromString:img];
+    [_epubContentView stringByEvaluatingJavaScriptFromString:svg];
     [_epubContentView stringByEvaluatingJavaScriptFromString:hrefStyle];
     [_epubContentView stringByEvaluatingJavaScriptFromString:setTextSizeRule];
     

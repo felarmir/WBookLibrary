@@ -17,6 +17,8 @@
 		C359119A1E66F6C70093C648 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C35911941E66F6C70093C648 /* unzip.c */; };
 		C359119B1E66F6C70093C648 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C35911961E66F6C70093C648 /* zip.c */; };
 		C359119E1E67029C0093C648 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C359119D1E67029C0093C648 /* WebKit.framework */; };
+		C35A1ED31E746105000BD2EC /* CollectionViewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35A1ED21E746105000BD2EC /* CollectionViewSectionHeader.xib */; };
+		C35A1ED61E746121000BD2EC /* CollectionViewSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C35A1ED51E746121000BD2EC /* CollectionViewSectionHeader.m */; };
 		C38907F51E64430700956D14 /* BookItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = C38907F41E64430700956D14 /* BookItemView.m */; };
 		C393D5AB1E66D75F0010F82D /* EPubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5AA1E66D75F0010F82D /* EPubViewController.m */; };
 		C393D5B31E66DACF0010F82D /* EPubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5B21E66DACF0010F82D /* EPubParser.m */; };
@@ -52,6 +54,9 @@
 		C35911961E66F6C70093C648 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zip.c; path = minizip/zip.c; sourceTree = "<group>"; };
 		C35911971E66F6C70093C648 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zip.h; path = minizip/zip.h; sourceTree = "<group>"; };
 		C359119D1E67029C0093C648 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		C35A1ED21E746105000BD2EC /* CollectionViewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewSectionHeader.xib; sourceTree = "<group>"; };
+		C35A1ED41E746121000BD2EC /* CollectionViewSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewSectionHeader.h; sourceTree = "<group>"; };
+		C35A1ED51E746121000BD2EC /* CollectionViewSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewSectionHeader.m; sourceTree = "<group>"; };
 		C38907F31E64430600956D14 /* BookItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookItemView.h; sourceTree = "<group>"; };
 		C38907F41E64430700956D14 /* BookItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookItemView.m; sourceTree = "<group>"; };
 		C393D5A91E66D75F0010F82D /* EPubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPubViewController.h; sourceTree = "<group>"; };
@@ -173,6 +178,9 @@
 				C3ED14141E6C5B920050900D /* ProgressView.m */,
 				C327D56E1E70795300F60B49 /* ToolBarHandlers.h */,
 				C327D56F1E70795300F60B49 /* ToolBarHandlers.m */,
+				C35A1ED21E746105000BD2EC /* CollectionViewSectionHeader.xib */,
+				C35A1ED41E746121000BD2EC /* CollectionViewSectionHeader.h */,
+				C35A1ED51E746121000BD2EC /* CollectionViewSectionHeader.m */,
 			);
 			path = WBookLibrary;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3EF0EF71E5B686A002917F7 /* BookItem.xib in Resources */,
+				C35A1ED31E746105000BD2EC /* CollectionViewSectionHeader.xib in Resources */,
 				C3EF0EE61E5B67AE002917F7 /* Assets.xcassets in Resources */,
 				C3EF0EE91E5B67AE002917F7 /* Main.storyboard in Resources */,
 			);
@@ -274,6 +283,7 @@
 				C3EF0EF61E5B686A002917F7 /* BookItem.m in Sources */,
 				C3EF0EF21E5B683D002917F7 /* MainViewController.m in Sources */,
 				C3ED14121E6BF7B10050900D /* LibraryViewWithDragAndDrop.m in Sources */,
+				C35A1ED61E746121000BD2EC /* CollectionViewSectionHeader.m in Sources */,
 				C359119A1E66F6C70093C648 /* unzip.c in Sources */,
 				C35911991E66F6C70093C648 /* mztools.c in Sources */,
 			);
@@ -333,7 +343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -374,7 +384,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};

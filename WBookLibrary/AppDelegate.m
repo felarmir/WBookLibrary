@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "DataConfigLoader.h"
 
 @interface AppDelegate ()
 

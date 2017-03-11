@@ -13,6 +13,8 @@
 
 @property (weak) IBOutlet NSCollectionView *collectionView;
 @property (weak) IBOutlet ProgressView *progressView;
+@property (weak) IBOutlet NSButton *editButton;
 
+-(IBAction)editBookList:(id)sender;
 
 @end
