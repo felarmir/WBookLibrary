@@ -22,6 +22,9 @@
 @property (weak) IBOutlet NSComboBox *groupBox;
 @property (nonatomic) NSString *groupName;
 
+/**
+ function for set item to edit mode
+ */
 -(void)setBookEditMode:(BOOL)isEdit;
 
 @end

@@ -23,12 +23,22 @@
 
 @implementation MainViewController
 {
+    /** 
+        for keep book files directory
+     */
     NSString *filesDirectory;
     DataConfigLoader *dataConfig;
     AppDelegate *appDeleagte;
     BOOL isEditBookList;
     
+    /**
+        Dictionary for keep data by group
+     */
     NSMutableDictionary<NSString*, NSArray*> *bookListDict;
+    
+    /**
+        Dictionary for relation between file name and atribute name
+     */
     NSMutableDictionary<NSString*, NSString*> *fileNameRealName;
 }
 
@@ -41,6 +51,8 @@
     dataConfig = [DataConfigLoader singleInstance]; // get settings object
     [dataConfig setDelegate:self];
     [(LibraryViewWithDragAndDrop*)self.view setDelegate:self];
+    
+    [_editButton.layer setBackgroundColor:[NSColor clearColor].CGColor];
     
     CGSize wsize = [dataConfig getFrameWindowSize];
     if (wsize.height == 0) {
@@ -66,15 +78,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDeleagte.window];
 }
 
+/**
+    function for save findow size after resize
+ */
 -(void)resizeWindow {
     [[DataConfigLoader singleInstance] setWindowSize:self.view.frame.size];
 }
+
 /**
- Book list by group
+    Generate books by group
  */
 -(void)generateBookListArrayByGroup {
-    //[0"Developer", 1"Languages", 2"Fiction", 3"Science", 4"Unknown"];
-    NSArray *groupList = [[DataConfigLoader singleInstance] bookGroups];
+    
     NSArray *booksInDB = [[DataConfigLoader singleInstance] loadBookGroupList];
     NSArray *bookList = [self readFolder];
     fileNameRealName = [[NSMutableDictionary alloc] init];
@@ -86,7 +101,7 @@
             [tmpArray addObject:[self bookNameByIndex:bookList index:i]];
             [fileNameRealName setObject:[bookList objectAtIndex:i] forKey:[self bookNameByIndex:bookList index:i]];
         }
-        [bookListDict setObject:tmpArray forKey:[groupList lastObject]];
+        [bookListDict setObject:tmpArray forKey:@"Unknown"];
     } else {
         for (int i = 0; i < [bookList count]; i++) {
             NSString *tmpGr = [self getBookGroup:booksInDB bookName:[self bookNameByIndex:bookList index:i]];
@@ -109,17 +124,22 @@
     }
 }
 
+/**
+    function for check that book contains group or not 
+*/
 -(NSString*)getBookGroup:(NSArray<BookList*>*)bookArray bookName:(NSString*)bookName {
     for (int i = 0; i < [bookArray count]; i++) {
         BookList *book = (BookList*)[bookArray objectAtIndex:i];
         if ([bookName isEqualToString:[book bookName]]) {
-            NSLog(@"==>%@", [book groupName]);
             return [book groupName];
         }
     }
     return nil;
 }
 
+/**
+    function will return book name from attribute or if atribute does not contain book name then return file name
+ */
 -(NSString*)bookNameByIndex:(NSArray*)books index:(NSInteger)index {
     NSString *tmp = [self getFileAttributeName:[NSString stringWithFormat:@"%@/%@", filesDirectory, [books objectAtIndex:index]]];
     
@@ -134,6 +154,9 @@
     return [[pdfDoc documentAttributes] objectForKey:@"Title"];
 }
 
+/**
+    function for reading files directory and return epub and pdf files array
+ */
 -(NSArray*) readFolder {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSMutableArray *fileList = (NSMutableArray*)[fileManager contentsOfDirectoryAtPath:filesDirectory error:nil];
@@ -146,7 +169,7 @@
     return ff;
 }
 
-// Collection View start
+#pragma mark - NSCollectionView delegate methods
 
 -(NSInteger)numberOfSectionsInCollectionView:(NSCollectionView *)collectionView {
     return [[bookListDict allKeys] count];
@@ -186,6 +209,7 @@
     [item setBookEditMode:isEditBookList];
     
     [item.bookName setStringValue:[[bookListDict objectForKey:[[bookListDict allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.item]];
+    [item.groupBox setStringValue:[[bookListDict allKeys] objectAtIndex:indexPath.section]];
     
     return item;
 }
@@ -209,6 +233,7 @@
     
 }
 
+
 // collection view end
 
 -(void)finishBookLoad {
@@ -231,13 +256,13 @@
     [self.collectionView reloadData];
 }
 
+#pragma mark - IBAction for edit collection view  
+
 -(IBAction)editBookList:(id)sender {
     if (isEditBookList) {
         [_editButton setTitle:@"Edit"];
-        [_editButton.layer setBackgroundColor:[NSColor clearColor].CGColor];
     } else {
         [_editButton setTitle:@"Editing"];
-        [_editButton.layer setBackgroundColor:[NSColor grayColor].CGColor];
         [_editButton.layer setCornerRadius:5.0];
     }
     [_collectionView reloadData];

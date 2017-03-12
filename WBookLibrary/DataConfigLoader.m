@@ -55,6 +55,7 @@
     return [(AppSettings*)[[self loadSettingsData] objectAtIndex:0] bookLibPath];
 }
 
+
 -(void)setBookPath:(NSString*)path {
     AppSettings *settings= (AppSettings*)[[self loadSettingsData] objectAtIndex:0];
     settings.bookLibPath = path;
@@ -103,18 +104,51 @@
     return data;
 }
 
+
+/**
+ Function for adding book to group
+
+ @param group NSString value which contains Group name
+ @param bookName NSString value book name
+ @return result success add or not
+ */
 -(BOOL)addBookToGroup:(NSString*)group bookName:(NSString*)bookName {
-    BookList *book = [NSEntityDescription insertNewObjectForEntityForName:@"BookList" inManagedObjectContext:[appDelegate managedObjectContext]];
-    book.bookName = bookName;
-    book.groupName = group;
     
-    NSError *err;
-    [[book managedObjectContext] save:&err];
-    if (err) {
-        NSLog(@"Error to Group Add");
-        return NO;
+    BookList *book = nil;
+    
+    if ((book = [self chekBookInGroups:bookName]) != nil) {
+        book.groupName = group;
+        NSError *err;
+        [[book managedObjectContext] save:&err];
+        if (err) {
+            NSLog(@"Error update");
+            return NO;
+        }
+    } else {
+        book = [NSEntityDescription insertNewObjectForEntityForName:@"BookList" inManagedObjectContext:[appDelegate managedObjectContext]];
+        book.bookName = bookName;
+        book.groupName = group;
+    
+        NSError *err;
+        [[book managedObjectContext] save:&err];
+        if (err) {
+            NSLog(@"Error to Group Add");
+            return NO;
+        }
     }
     return YES;
+}
+
+-(BookList*)chekBookInGroups:(NSString*)bookName {
+    NSArray *tmpArray = [self loadBookGroupList];
+    for (int i = 0; i < [tmpArray count]; i++) {
+        BookList *tmpBook = [tmpArray objectAtIndex:i];
+        if ([tmpBook.bookName isEqualToString:bookName]) {
+            return tmpBook;
+        }
+    }
+    
+    return nil;
 }
 
 //=================================================================================
@@ -128,8 +162,14 @@
     return CGSizeMake([_userDefaults floatForKey:WINDOW_WIDTH], [_userDefaults floatForKey:WINDOW_HEIGHT]);
 }
 
+
+/**
+ Book Groups constants
+
+ @return NSArray with groups
+ */
 -(NSArray*)bookGroups {
-    return [NSArray arrayWithObjects:@"Developer", @"Languages", @"Fiction", @"Science", @"Unknown", nil];
+    return [NSArray arrayWithObjects:@"Developer", @"Languages", @"Fiction", @"Science", nil];
 }
 
 @end
