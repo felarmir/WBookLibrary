@@ -8,7 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol BookItemDelegate <NSObject>
+
+-(void)finishSaveToGroup;
+
+@end
+
 @interface BookItem : NSCollectionViewItem <NSComboBoxDelegate, NSComboBoxDataSource>
+
+@property (nonatomic, assign) id<BookItemDelegate> delegate;
 
 @property (weak) IBOutlet NSTextField *bookName;
 @property (weak) IBOutlet NSComboBox *groupBox;

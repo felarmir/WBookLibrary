@@ -103,8 +103,8 @@
     return data;
 }
 
--(void)addBookToGroup:(NSString*)group bookName:(NSString*)bookName {
-    BookList *book = [NSEntityDescription insertNewObjectForEntityForName:@"BoookList" inManagedObjectContext:[appDelegate managedObjectContext]];
+-(BOOL)addBookToGroup:(NSString*)group bookName:(NSString*)bookName {
+    BookList *book = [NSEntityDescription insertNewObjectForEntityForName:@"BookList" inManagedObjectContext:[appDelegate managedObjectContext]];
     book.bookName = bookName;
     book.groupName = group;
     
@@ -112,7 +112,9 @@
     [[book managedObjectContext] save:&err];
     if (err) {
         NSLog(@"Error to Group Add");
+        return NO;
     }
+    return YES;
 }
 
 //=================================================================================

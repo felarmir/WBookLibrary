@@ -17,7 +17,7 @@
 #import "CollectionViewSectionHeader.h"
 #import "BookList+CoreDataClass.h"
 
-@interface MainViewController ()<DataConfigLoaderDelegate, LibraryViewWithDragAndDropDelegate>
+@interface MainViewController ()<DataConfigLoaderDelegate, LibraryViewWithDragAndDropDelegate, BookItemDelegate>
 
 @end
 
@@ -88,9 +88,36 @@
         }
         [bookListDict setObject:tmpArray forKey:[groupList lastObject]];
     } else {
-        
+        for (int i = 0; i < [bookList count]; i++) {
+            NSString *tmpGr = [self getBookGroup:booksInDB bookName:[self bookNameByIndex:bookList index:i]];
+            if (tmpGr != nil) {
+                if([bookListDict objectForKey:tmpGr] == nil) {
+                    [bookListDict setObject:[NSMutableArray arrayWithObject:[self bookNameByIndex:bookList index:i]] forKey:tmpGr];
+                } else {
+                    [(NSMutableArray*)[bookListDict objectForKey:tmpGr] addObject:[self bookNameByIndex:bookList index:i]];
+                }
+            } else {
+                if ([bookListDict objectForKey:@"Unknown"] == nil) {
+                    [bookListDict setObject:[NSMutableArray arrayWithObject:[self bookNameByIndex:bookList index:i]] forKey:@"Unknown"];
+                } else {
+                    [(NSMutableArray*)[bookListDict objectForKey:@"Unknown"] addObject:[self bookNameByIndex:bookList index:i]];
+                }
+            }
+        [fileNameRealName setObject:[bookList objectAtIndex:i] forKey:[self bookNameByIndex:bookList index:i]];
+        }
         
     }
+}
+
+-(NSString*)getBookGroup:(NSArray<BookList*>*)bookArray bookName:(NSString*)bookName {
+    for (int i = 0; i < [bookArray count]; i++) {
+        BookList *book = (BookList*)[bookArray objectAtIndex:i];
+        if ([bookName isEqualToString:[book bookName]]) {
+            NSLog(@"==>%@", [book groupName]);
+            return [book groupName];
+        }
+    }
+    return nil;
 }
 
 -(NSString*)bookNameByIndex:(NSArray*)books index:(NSInteger)index {
@@ -139,7 +166,7 @@
 
 -(NSCollectionViewItem*)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     BookItem *item = [collectionView makeItemWithIdentifier:@"BookItem" forIndexPath:indexPath];
-    
+    [item setDelegate:self];
     if ((indexPath.item % 2) == 0) {
         NSColor *start = [NSColor colorWithRed:153.0/255.0
                                          green:26.0/255.0 blue:61.0/255.0 alpha:1.0];
@@ -187,6 +214,11 @@
 -(void)finishBookLoad {
     [self changeData];
     [_progressView setHidden:YES];
+}
+
+-(void)finishSaveToGroup {
+    [self generateBookListArrayByGroup];
+    [self.collectionView reloadData];
 }
 
 -(void)copyProgressStatus:(NSNumber*)progress {

@@ -57,7 +57,12 @@
 }
 
 -(void)comboBoxSelectionDidChange:(NSNotification *)notification {
-    [[DataConfigLoader singleInstance] addBookToGroup:[groupArray objectAtIndex:[_groupBox indexOfSelectedItem]] bookName:[_bookName stringValue]];
+    if([[DataConfigLoader singleInstance] addBookToGroup:[groupArray objectAtIndex:[_groupBox indexOfSelectedItem]] bookName:[_bookName stringValue]]) {
+        if (_delegate && [_delegate respondsToSelector:@selector(finishSaveToGroup)]) {
+            [_delegate performSelector:@selector(finishSaveToGroup)];
+        }
+    }
+    
 }
 
 @end

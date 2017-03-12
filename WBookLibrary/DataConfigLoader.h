@@ -28,6 +28,6 @@
 -(NSArray*)bookGroups;
 
 -(NSArray*)loadBookGroupList;
--(void)addBookToGroup:(NSString*)group bookName:(NSString*)bookName;
+-(BOOL)addBookToGroup:(NSString*)group bookName:(NSString*)bookName;
 
 @end
