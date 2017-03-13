@@ -92,6 +92,20 @@
         [newItem setLabel:@"One Page"];
         [newItem setPaletteLabel:@"One Page"];
         
+    } else if([itemIdentifier isEqualToString:@"ZoomIn"]){
+        newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+        [btn setImage:[NSImage imageNamed:@"zoomin"]];
+        [btn setAction:@selector(zoomin:)];
+        [newItem setLabel:@"Zoom In"];
+        [newItem setPaletteLabel:@"Zoom In"];
+        
+    } else if([itemIdentifier isEqualToString:@"ZoomOut"]){
+        newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+        [btn setImage:[NSImage imageNamed:@"zoomout"]];
+        [btn setAction:@selector(zoomout:)];
+        [newItem setLabel:@"Zoom Out"];
+        [newItem setPaletteLabel:@"Zoom Out"];
+        
     }
     
     [btn setImageScaling:NSImageScaleAxesIndependently];
@@ -109,6 +123,7 @@
 {
     return [NSArray arrayWithObjects:@"Library",
             NSToolbarFlexibleSpaceItemIdentifier,
+            @"ZoomIn", @"ZoomOut",
             @"OnePage", @"TwoPage", nil];
 }
 
@@ -116,8 +131,10 @@
 {
     return [NSArray arrayWithObjects:@"Library",
             NSToolbarFlexibleSpaceItemIdentifier,
+            @"ZoomIn", @"ZoomOut",
             @"OnePage", @"TwoPage", nil];
 }
+
 
 -(void)returnToLibrary:(id)sender {
     [toolHandlers loadCatalogue];
@@ -125,6 +142,14 @@
 
 -(void)nextPage:(id)sender {
     [_pdfView goToNextPage:sender];
+}
+
+-(void)zoomin:(id)sender {
+    [_pdfView zoomIn:sender];
+}
+
+-(void)zoomout:(id)sender {
+    [_pdfView zoomOut:sender];
 }
 
 -(void)setTwoPage:(id)sender {
@@ -135,5 +160,8 @@
     [_pdfView setDisplayMode:kPDFDisplaySinglePageContinuous];
 }
 
+-(void)seletedText:(id)sender {
+    
+}
 
 @end
