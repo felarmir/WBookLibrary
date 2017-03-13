@@ -29,5 +29,7 @@
 
 -(NSArray*)loadBookGroupList;
 -(BOOL)addBookToGroup:(NSString*)group bookName:(NSString*)bookName;
+-(BOOL)addPagePositinByName:(NSString*)bookName page:(int)page;
+-(int)getPagePositin:(NSString*)bookName;
 
 @end

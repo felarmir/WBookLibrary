@@ -23,6 +23,12 @@
 		C393D5AB1E66D75F0010F82D /* EPubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5AA1E66D75F0010F82D /* EPubViewController.m */; };
 		C393D5B31E66DACF0010F82D /* EPubParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5B21E66DACF0010F82D /* EPubParser.m */; };
 		C393D5BF1E66F3600010F82D /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C393D5BE1E66F3600010F82D /* SSZipArchive.m */; };
+		C3AB08251E7696E700A8ADEE /* AppSettings+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AB081B1E7696E700A8ADEE /* AppSettings+CoreDataClass.m */; };
+		C3AB08261E7696E700A8ADEE /* AppSettings+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AB081D1E7696E700A8ADEE /* AppSettings+CoreDataProperties.m */; };
+		C3AB08271E7696E700A8ADEE /* BookList+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AB081E1E7696E700A8ADEE /* BookList+CoreDataClass.m */; };
+		C3AB08281E7696E700A8ADEE /* BookList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AB08201E7696E700A8ADEE /* BookList+CoreDataProperties.m */; };
+		C3AB08291E7696E700A8ADEE /* PagePositin+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AB08221E7696E700A8ADEE /* PagePositin+CoreDataClass.m */; };
+		C3AB082A1E7696E700A8ADEE /* PagePositin+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AB08241E7696E700A8ADEE /* PagePositin+CoreDataProperties.m */; };
 		C3ED14121E6BF7B10050900D /* LibraryViewWithDragAndDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ED14111E6BF7B10050900D /* LibraryViewWithDragAndDrop.m */; };
 		C3ED14151E6C5B920050900D /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ED14141E6C5B920050900D /* ProgressView.m */; };
 		C3EF0EDB1E5B67AE002917F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EF0EDA1E5B67AE002917F7 /* AppDelegate.m */; };
@@ -67,6 +73,18 @@
 		C393D5B81E66EE9F0010F82D /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		C393D5BD1E66F3600010F82D /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C393D5BE1E66F3600010F82D /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		C3AB08081E76965B00A8ADEE /* BookList+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BookList+CoreDataClass.h"; sourceTree = "<group>"; };
+		C3AB081A1E7696E700A8ADEE /* AppSettings+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppSettings+CoreDataClass.h"; sourceTree = "<group>"; };
+		C3AB081B1E7696E700A8ADEE /* AppSettings+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppSettings+CoreDataClass.m"; sourceTree = "<group>"; };
+		C3AB081C1E7696E700A8ADEE /* AppSettings+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppSettings+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C3AB081D1E7696E700A8ADEE /* AppSettings+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppSettings+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C3AB081E1E7696E700A8ADEE /* BookList+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BookList+CoreDataClass.m"; sourceTree = "<group>"; };
+		C3AB081F1E7696E700A8ADEE /* BookList+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BookList+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C3AB08201E7696E700A8ADEE /* BookList+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BookList+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C3AB08211E7696E700A8ADEE /* PagePositin+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PagePositin+CoreDataClass.h"; sourceTree = "<group>"; };
+		C3AB08221E7696E700A8ADEE /* PagePositin+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PagePositin+CoreDataClass.m"; sourceTree = "<group>"; };
+		C3AB08231E7696E700A8ADEE /* PagePositin+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PagePositin+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C3AB08241E7696E700A8ADEE /* PagePositin+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PagePositin+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C3ED14101E6BF7B10050900D /* LibraryViewWithDragAndDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryViewWithDragAndDrop.h; sourceTree = "<group>"; };
 		C3ED14111E6BF7B10050900D /* LibraryViewWithDragAndDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryViewWithDragAndDrop.m; sourceTree = "<group>"; };
 		C3ED14131E6C5B920050900D /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
@@ -145,6 +163,18 @@
 		C3EF0ED81E5B67AD002917F7 /* WBookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C3AB081A1E7696E700A8ADEE /* AppSettings+CoreDataClass.h */,
+				C3AB081B1E7696E700A8ADEE /* AppSettings+CoreDataClass.m */,
+				C3AB081C1E7696E700A8ADEE /* AppSettings+CoreDataProperties.h */,
+				C3AB081D1E7696E700A8ADEE /* AppSettings+CoreDataProperties.m */,
+				C3AB08081E76965B00A8ADEE /* BookList+CoreDataClass.h */,
+				C3AB081E1E7696E700A8ADEE /* BookList+CoreDataClass.m */,
+				C3AB081F1E7696E700A8ADEE /* BookList+CoreDataProperties.h */,
+				C3AB08201E7696E700A8ADEE /* BookList+CoreDataProperties.m */,
+				C3AB08211E7696E700A8ADEE /* PagePositin+CoreDataClass.h */,
+				C3AB08221E7696E700A8ADEE /* PagePositin+CoreDataClass.m */,
+				C3AB08231E7696E700A8ADEE /* PagePositin+CoreDataProperties.h */,
+				C3AB08241E7696E700A8ADEE /* PagePositin+CoreDataProperties.m */,
 				C359119C1E66F6DE0093C648 /* minizip */,
 				C393D5BD1E66F3600010F82D /* SSZipArchive.h */,
 				C393D5BE1E66F3600010F82D /* SSZipArchive.m */,
@@ -271,16 +301,22 @@
 				C38907F51E64430700956D14 /* BookItemView.m in Sources */,
 				C327D5701E70795300F60B49 /* ToolBarHandlers.m in Sources */,
 				C3EF0EDE1E5B67AE002917F7 /* main.m in Sources */,
+				C3AB08271E7696E700A8ADEE /* BookList+CoreDataClass.m in Sources */,
 				C31F33A81E603AA00059DBA3 /* PDFViewer.m in Sources */,
 				C359119B1E66F6C70093C648 /* zip.c in Sources */,
+				C3AB08251E7696E700A8ADEE /* AppSettings+CoreDataClass.m in Sources */,
 				C35911981E66F6C70093C648 /* ioapi.c in Sources */,
+				C3AB08281E7696E700A8ADEE /* BookList+CoreDataProperties.m in Sources */,
 				C31F33AB1E6048BB0059DBA3 /* UserPreference.m in Sources */,
+				C3AB08291E7696E700A8ADEE /* PagePositin+CoreDataClass.m in Sources */,
+				C3AB08261E7696E700A8ADEE /* AppSettings+CoreDataProperties.m in Sources */,
 				C393D5AB1E66D75F0010F82D /* EPubViewController.m in Sources */,
 				C31F33AE1E61721F0059DBA3 /* DataConfigLoader.m in Sources */,
 				C3EF0EDB1E5B67AE002917F7 /* AppDelegate.m in Sources */,
 				C393D5B31E66DACF0010F82D /* EPubParser.m in Sources */,
 				C3ED14151E6C5B920050900D /* ProgressView.m in Sources */,
 				C3EF0EF61E5B686A002917F7 /* BookItem.m in Sources */,
+				C3AB082A1E7696E700A8ADEE /* PagePositin+CoreDataProperties.m in Sources */,
 				C3EF0EF21E5B683D002917F7 /* MainViewController.m in Sources */,
 				C3ED14121E6BF7B10050900D /* LibraryViewWithDragAndDrop.m in Sources */,
 				C35A1ED61E746121000BD2EC /* CollectionViewSectionHeader.m in Sources */,

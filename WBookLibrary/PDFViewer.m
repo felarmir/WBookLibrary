@@ -31,6 +31,7 @@
     toolHandlers = [[ToolBarHandlers alloc] init];
     NSURL *url = [NSURL fileURLWithPath:_bookURL];
     pdfDoc = [[PDFDocument alloc] initWithURL:url];
+    
     NSString *title = [[pdfDoc documentAttributes] objectForKey:@"Title"];
     if (title == nil) {
         title = @"unknown title";
@@ -39,16 +40,26 @@
     [appDelegate.window setTitle:title];
     [_pdfView setDocument:pdfDoc];
     [_pdfView setAutoScales:YES];
-    
+    PDFPage *page = [pdfDoc pageAtIndex:[[DataConfigLoader singleInstance] getPagePositin:[_bookURL lastPathComponent]]];
+    [_pdfView goToPage:page];
+
     NSToolbar *toolBar = [[NSToolbar alloc] initWithIdentifier:@"PDFViewToolBar"];
     [toolBar setDelegate:self];
     [appDelegate.window setToolbar:toolBar];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDelegate.window];
+    
+    [[_pdfView enclosingScrollView] setPostsBoundsChangedNotifications:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollDocument) name:NSViewBoundsDidChangeNotification object:[_pdfView enclosingScrollView]];
 }
 
 -(void)resizeWindow {
     [[DataConfigLoader singleInstance] setWindowSize:self.view.frame.size];
+}
+
+-(void)scrollDocument {
+    [[DataConfigLoader singleInstance] addPagePositinByName:[_bookURL lastPathComponent] page:(int)[[_pdfView document] indexForPage:[_pdfView currentPage]]];
 }
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:
@@ -123,5 +134,6 @@
 -(void)setOnePage:(id)sender {
     [_pdfView setDisplayMode:kPDFDisplaySinglePageContinuous];
 }
+
 
 @end

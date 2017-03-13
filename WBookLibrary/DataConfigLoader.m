@@ -10,8 +10,9 @@
 #import "AppDelegate.h"
 #import "BookList+CoreDataProperties.h"
 #import "AppSettings+CoreDataProperties.h"
+#import "PagePositin+CoreDataProperties.h"
 
-#define BOOK_LIBRARY_PATH @"booklibrarypath"
+
 #define WINDOW_HEIGHT @"windowheight"
 #define WINDOW_WIDTH @"windowwidth"
 
@@ -149,6 +150,57 @@
     }
     
     return nil;
+}
+
+-(NSArray*)loadPagesPosition {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    fetchRequest.entity = [NSEntityDescription entityForName:@"PagePositin" inManagedObjectContext:[appDelegate managedObjectContext]];
+    NSError *error;
+    NSArray *data = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    if(error) {
+        NSLog(@"Error get data");
+        return nil;
+    }
+    return data;
+}
+
+-(BOOL)addPagePositinByName:(NSString*)bookName page:(int)page {
+    PagePositin *pp = nil;
+    if ((pp = [self checkBookPagePositin:bookName]) != nil) {
+        pp.pagePosition = page;
+        NSError *err;
+        [[pp managedObjectContext] save:&err];
+        if(err) {
+            return NO;
+        }
+    } else {
+        pp = [NSEntityDescription insertNewObjectForEntityForName:@"PagePositin" inManagedObjectContext:[appDelegate managedObjectContext]];
+        pp.bookName = bookName;
+        pp.pagePosition = page;
+        
+        NSError *err;
+        [[pp managedObjectContext] save:&err];
+        if(err) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+-(PagePositin*)checkBookPagePositin:(NSString*)bookName {
+    NSArray *tmp = [self loadPagesPosition];
+    for(int i = 0; i < [tmp count]; i++) {
+        PagePositin *pp = [tmp objectAtIndex:i];
+        if([bookName isEqualToString:[pp bookName]]) {
+            return pp;
+        }
+    }
+    return nil;
+}
+
+-(int)getPagePositin:(NSString*)bookName {
+    return [[self checkBookPagePositin:bookName] pagePosition];
 }
 
 //=================================================================================
