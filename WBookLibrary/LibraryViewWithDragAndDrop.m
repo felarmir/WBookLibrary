@@ -36,7 +36,7 @@
 }
 
 -(BOOL)performDragOperation:(id<NSDraggingInfo>)sender {
-    NSArray *extensions = @[@"epub", @"pdf"];
+    NSArray *extensions = @[@"pdf"];
     NSArray *dragFileName = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
     if ([extensions containsObject:[[dragFileName objectAtIndex:0] pathExtension]]) {
         return YES;

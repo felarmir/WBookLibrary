@@ -21,8 +21,6 @@
     _window = [[[NSApplication sharedApplication] windows] firstObject];
     _window.titlebarAppearsTransparent = YES;
     _window.titleVisibility = NSWindowTitleHidden;
-    _window.opaque = NO;
-    _window.backgroundColor = [NSColor clearColor];
     _window.styleMask |= NSFullSizeContentViewWindowMask;
 }
 

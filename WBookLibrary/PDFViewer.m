@@ -11,7 +11,7 @@
 #import "DataConfigLoader.h"
 #import "ToolBarHandlers.h"
 
-@interface PDFViewer ()<NSToolbarDelegate>
+@interface PDFViewer ()<NSToolbarDelegate, NSSplitViewDelegate>
 
 @end
 
@@ -21,13 +21,18 @@
     PDFDocument *pdfDoc;
     ToolBarHandlers *toolHandlers;
     NSArray<NSToolbarItem*> *toolBarItems;
+    BOOL isShowTools;
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     appDelegate = [[NSApplication sharedApplication] delegate];
     appDelegate.window.titlebarAppearsTransparent = NO;
     CGSize wsize = [[DataConfigLoader singleInstance] getFrameWindowSize];
     [self.view setFrameSize:wsize];
+    isShowTools = false;
+    
     toolHandlers = [[ToolBarHandlers alloc] init];
     NSURL *url = [NSURL fileURLWithPath:_bookURL];
     pdfDoc = [[PDFDocument alloc] initWithURL:url];
@@ -36,6 +41,12 @@
     if (title == nil) {
         title = @"unknown title";
     }
+    
+    [_splitView setDelegate:self];
+    [[[_splitView subviews] objectAtIndex:0] setFrame:NSMakeRect(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    
+    [[[_splitView subviews] objectAtIndex:1] setFrame:NSMakeRect(0, 0, 0, self.view.bounds.size.height)];
+    
     self.title = title;
     [appDelegate.window setTitle:title];
     [_pdfView setDocument:pdfDoc];
@@ -106,6 +117,13 @@
         [newItem setLabel:@"Zoom Out"];
         [newItem setPaletteLabel:@"Zoom Out"];
         
+    } else if([itemIdentifier isEqualToString:@"Tools"]){
+        newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+        [btn setImage:[NSImage imageNamed:@"tools"]];
+        [btn setAction:@selector(showInstruments:)];
+        [newItem setLabel:@"Tools"];
+        [newItem setPaletteLabel:@"Tools"];
+        
     }
     
     [btn setImageScaling:NSImageScaleAxesIndependently];
@@ -124,7 +142,7 @@
     return [NSArray arrayWithObjects:@"Library",
             NSToolbarFlexibleSpaceItemIdentifier,
             @"ZoomIn", @"ZoomOut",
-            @"OnePage", @"TwoPage", nil];
+            @"OnePage", @"TwoPage", @"Tools", nil];
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
@@ -132,7 +150,7 @@
     return [NSArray arrayWithObjects:@"Library",
             NSToolbarFlexibleSpaceItemIdentifier,
             @"ZoomIn", @"ZoomOut",
-            @"OnePage", @"TwoPage", nil];
+            @"OnePage", @"TwoPage", @"Tools", nil];
 }
 
 
@@ -160,8 +178,30 @@
     [_pdfView setDisplayMode:kPDFDisplaySinglePageContinuous];
 }
 
+-(void)showInstruments:(id)sender {
+    if(!isShowTools) {
+        [[[_splitView subviews] objectAtIndex:0] setFrame:NSMakeRect(0, 0, self.view.bounds.size.width-200.f, self.view.bounds.size.height)];
+        [[[_splitView subviews] objectAtIndex:1] setFrame:NSMakeRect(0.f, 0.f, 200.f, self.view.bounds.size.height)];
+    } else {
+        [[[_splitView subviews] objectAtIndex:0] setFrame:NSMakeRect(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        [[[_splitView subviews] objectAtIndex:1] setFrame:NSMakeRect(0.f, 0.f, 0.f, self.view.bounds.size.height)];
+    }
+    isShowTools = !isShowTools;
+}
+
 -(void)seletedText:(id)sender {
     
 }
+
+#pragma mark NSSplitViewDelegate
+/*
+-(CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex {
+    return self.view.bounds.size.width - 200;
+}
+*/
+-(CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex {
+    return self.view.bounds.size.width - 200;;
+}
+
 
 @end

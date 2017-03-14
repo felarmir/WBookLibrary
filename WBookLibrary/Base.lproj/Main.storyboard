@@ -261,25 +261,11 @@
                                     <rect key="frame" x="1" y="627" width="484" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="YY4-1i-9Sn">
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.5" horizontal="NO" id="YY4-1i-9Sn">
                                     <rect key="frame" x="470" y="60" width="16" height="315"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-nU-3j7">
-                                <rect key="frame" x="425" y="356" width="60" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="8P0-qh-8I2"/>
-                                    <constraint firstAttribute="height" constant="16" id="jVC-lH-ANB"/>
-                                </constraints>
-                                <buttonCell key="cell" type="recessed" title="Edit" bezelStyle="recessed" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cbc-nM-KVz">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="systemBold" size="12"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="editBookList:" target="XfG-lQ-9wD" id="DaV-of-7dG"/>
-                                </connections>
-                            </button>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1dV-4I-2dU" customClass="ProgressView">
                                 <rect key="frame" x="0.0" y="355" width="486" height="20"/>
                                 <subviews>
@@ -300,6 +286,20 @@
                                     <outlet property="progressIndicator" destination="41h-Dp-Yjj" id="7A0-pT-eOT"/>
                                 </connections>
                             </customView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-nU-3j7">
+                                <rect key="frame" x="425" y="356" width="60" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="8P0-qh-8I2"/>
+                                    <constraint firstAttribute="height" constant="16" id="jVC-lH-ANB"/>
+                                </constraints>
+                                <buttonCell key="cell" type="recessed" title="Edit" bezelStyle="recessed" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cbc-nM-KVz">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                    <font key="font" metaFont="systemBold" size="12"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="editBookList:" target="XfG-lQ-9wD" id="DaV-of-7dG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="LyB-1o-Cr7" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="2FP-qv-eh7"/>
@@ -392,19 +392,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="290"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <pdfView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81C-Dz-8PV">
+                            <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uv8-yU-V9B">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="290"/>
-                            </pdfView>
+                                <subviews>
+                                    <customView id="UdM-tx-tRf">
+                                        <rect key="frame" x="0.0" y="0.0" width="316" height="290"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <pdfView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81C-Dz-8PV">
+                                                <rect key="frame" x="0.0" y="0.0" width="316" height="290"/>
+                                            </pdfView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="81C-Dz-8PV" firstAttribute="leading" secondItem="UdM-tx-tRf" secondAttribute="leading" id="WM0-UF-Vzu"/>
+                                            <constraint firstAttribute="trailing" secondItem="81C-Dz-8PV" secondAttribute="trailing" id="lGz-2d-PvD"/>
+                                            <constraint firstItem="81C-Dz-8PV" firstAttribute="top" secondItem="UdM-tx-tRf" secondAttribute="top" id="mlX-DF-DJ9"/>
+                                            <constraint firstAttribute="bottom" secondItem="81C-Dz-8PV" secondAttribute="bottom" id="w97-Tu-QQR"/>
+                                        </constraints>
+                                    </customView>
+                                    <customView fixedFrame="YES" id="4Zv-aM-p9V">
+                                        <rect key="frame" x="317" y="0.0" width="133" height="290"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </customView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                </holdingPriorities>
+                            </splitView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="81C-Dz-8PV" secondAttribute="bottom" id="Jhb-U6-Vf3"/>
-                            <constraint firstItem="81C-Dz-8PV" firstAttribute="top" secondItem="UNS-YS-RqZ" secondAttribute="top" id="KRg-IV-FnW"/>
-                            <constraint firstAttribute="trailing" secondItem="81C-Dz-8PV" secondAttribute="trailing" id="PbC-wR-TWy"/>
-                            <constraint firstItem="81C-Dz-8PV" firstAttribute="leading" secondItem="UNS-YS-RqZ" secondAttribute="leading" id="z8D-MK-9jO"/>
+                            <constraint firstItem="Uv8-yU-V9B" firstAttribute="top" secondItem="UNS-YS-RqZ" secondAttribute="top" id="92Q-HO-sU2"/>
+                            <constraint firstAttribute="trailing" secondItem="Uv8-yU-V9B" secondAttribute="trailing" id="NqX-uj-dhM"/>
+                            <constraint firstItem="Uv8-yU-V9B" firstAttribute="leading" secondItem="UNS-YS-RqZ" secondAttribute="leading" id="gig-1F-rMx"/>
+                            <constraint firstAttribute="bottom" secondItem="Uv8-yU-V9B" secondAttribute="bottom" id="rIj-yn-xdK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="pdfView" destination="81C-Dz-8PV" id="LYd-bM-xgg"/>
+                        <outlet property="rightView" destination="4Zv-aM-p9V" id="cSk-4O-z00"/>
+                        <outlet property="splitView" destination="Uv8-yU-V9B" id="rMZ-Pn-MPB"/>
                     </connections>
                 </viewController>
                 <customObject id="lm0-WM-Ep2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -11,6 +11,8 @@
 @interface PDFViewer : NSViewController
 
 @property (weak) IBOutlet PDFView *pdfView;
+@property (weak) IBOutlet NSSplitView *splitView;
+@property (weak) IBOutlet NSView *rightView;
 
 @property (nonatomic, strong) NSString *bookURL;
 
