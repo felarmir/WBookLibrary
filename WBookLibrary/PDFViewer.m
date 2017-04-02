@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "DataConfigLoader.h"
 #import "ToolBarHandlers.h"
+#import "PDFMarks+CoreDataProperties.h"
 
 @interface PDFViewer ()<NSToolbarDelegate, NSSplitViewDelegate>
 
@@ -21,6 +22,7 @@
     PDFDocument *pdfDoc;
     ToolBarHandlers *toolHandlers;
     NSArray<NSToolbarItem*> *toolBarItems;
+    NSMutableArray<PDFSelection*> *selectionText;
     BOOL isShowTools;
 }
 
@@ -36,16 +38,15 @@
     toolHandlers = [[ToolBarHandlers alloc] init];
     NSURL *url = [NSURL fileURLWithPath:_bookURL];
     pdfDoc = [[PDFDocument alloc] initWithURL:url];
-    
+    selectionText = [[NSMutableArray alloc] init];
     NSString *title = [[pdfDoc documentAttributes] objectForKey:@"Title"];
     if (title == nil) {
         title = @"unknown title";
     }
-    
+
     [_splitView setDelegate:self];
-    [[[_splitView subviews] objectAtIndex:0] setFrame:NSMakeRect(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-    
-    [[[_splitView subviews] objectAtIndex:1] setFrame:NSMakeRect(0, 0, 0, self.view.bounds.size.height)];
+
+    [self collapseRightView];
     
     self.title = title;
     [appDelegate.window setTitle:title];
@@ -63,6 +64,22 @@
     [[_pdfView enclosingScrollView] setPostsBoundsChangedNotifications:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollDocument) name:NSViewBoundsDidChangeNotification object:[_pdfView enclosingScrollView]];
+    
+    [self highlightedLoad];
+    
+}
+
+-(void)highlightedLoad {
+    NSArray *data = [[DataConfigLoader singleInstance] marksArrayByBookName:[_bookURL lastPathComponent]];
+    if ([data count] > 0) {
+        for (PDFMarks *mark in data) {
+            PDFSelection *select = [pdfDoc findString:mark.text withOptions:NSCaseInsensitiveSearch][0];
+            select.color = [NSColor colorWithRed:mark.c_red green:mark.c_green blue:mark.c_blue alpha:1.0];
+            [selectionText addObject:select];
+        }
+    }
+    _pdfView.highlightedSelections = nil;
+    [_pdfView setHighlightedSelections:selectionText];
 }
 
 -(void)resizeWindow {
@@ -180,17 +197,62 @@
 
 -(void)showInstruments:(id)sender {
     if(!isShowTools) {
-        [[[_splitView subviews] objectAtIndex:0] setFrame:NSMakeRect(0, 0, self.view.bounds.size.width-200.f, self.view.bounds.size.height)];
-        [[[_splitView subviews] objectAtIndex:1] setFrame:NSMakeRect(0.f, 0.f, 200.f, self.view.bounds.size.height)];
+        [self uncollapseRightView];
     } else {
-        [[[_splitView subviews] objectAtIndex:0] setFrame:NSMakeRect(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        [[[_splitView subviews] objectAtIndex:1] setFrame:NSMakeRect(0.f, 0.f, 0.f, self.view.bounds.size.height)];
+        [self collapseRightView];
     }
     isShowTools = !isShowTools;
 }
 
--(void)seletedText:(id)sender {
+-(void)collapseRightView
+{
+    NSView *right = [[[self splitView] subviews] objectAtIndex:1];
+    NSView *left  = [[[self splitView] subviews] objectAtIndex:0];
+    NSRect leftFrame = [left frame];
+    NSRect overallFrame = [[self splitView] frame]; //???
+    [right setHidden:YES];
+    [left setFrameSize:NSMakeSize(overallFrame.size.width,leftFrame.size.height)];
+    [[self splitView] display];
+}
+
+-(void)uncollapseRightView
+{
+    NSView *left  = [[[self splitView] subviews] objectAtIndex:0];
+    NSView *right = [[[self splitView] subviews] objectAtIndex:1];
+    [right setHidden:NO];
+    CGFloat dividerThickness = [[self splitView] dividerThickness];
+    // get the different frames
+    NSRect leftFrame = [left frame];
+    NSRect rightFrame = [right frame];
+    // Adjust left frame size
+    leftFrame.size.width = (leftFrame.size.width-rightFrame.size.width-dividerThickness);
+    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+    [left setFrameSize:leftFrame.size];
+    [right setFrame:rightFrame];
+    [[self splitView] display];
+}
+
+//work
+-(void)addMarkonDocument {
+    NSLog(@"%@",[_pdfView.currentSelection string]);
+    PDFSelection *seletion = [_pdfView currentSelection];
+    [seletion setColor:[_markColor color]];
+    [selectionText addObject:seletion];
+  
+    if ([[DataConfigLoader singleInstance] addMarkByBookName:[_bookURL lastPathComponent]
+                                                        page:(int)[[_pdfView document] indexForPage:[_pdfView currentPage]] text:[_pdfView.currentSelection string]
+                                                    colorRed:[[_markColor color] redComponent]
+                                                  colorGreen:[[_markColor color] greenComponent]
+                                                   colorBlue:[[_markColor color] blueComponent]]) {
+        _pdfView.highlightedSelections = nil;
+        [_pdfView setHighlightedSelections:selectionText];
+    }
     
+}
+
+
+- (IBAction)markText:(id)sender {
+    [self addMarkonDocument];
 }
 
 #pragma mark NSSplitViewDelegate
@@ -202,6 +264,5 @@
 -(CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex {
     return self.view.bounds.size.width - 200;;
 }
-
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DataConfigLoader.h"
+#import <CoreImage/CoreImage.h>
 
 @interface AppDelegate ()
 
@@ -23,7 +24,6 @@
     _window.titleVisibility = NSWindowTitleHidden;
     _window.styleMask |= NSFullSizeContentViewWindowMask;
 }
-
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application

@@ -51,7 +51,7 @@
     dataConfig = [DataConfigLoader singleInstance]; // get settings object
     [dataConfig setDelegate:self];
     [(LibraryViewWithDragAndDrop*)self.view setDelegate:self];
-    
+    [_collectionView.layer setBorderColor:[NSColor clearColor].CGColor];
     [_editButton.layer setBackgroundColor:[NSColor clearColor].CGColor];
     
     CGSize wsize = [dataConfig getFrameWindowSize];
@@ -73,7 +73,7 @@
     
     [self.view setWantsLayer:YES];
     self.view.layer.cornerRadius = 5.0;
-    [self.view.layer setBackgroundColor:[NSColor blackColor].CGColor];
+    [self.view.layer setBackgroundColor:[NSColor clearColor].CGColor];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeWindow) name:NSWindowDidResizeNotification object:appDeleagte.window];
 }
@@ -265,6 +265,13 @@
         [_editButton setTitle:@"Editing"];
         [_editButton.layer setCornerRadius:5.0];
     }
+    
+    NSColor *color = [NSColor whiteColor];
+    NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[_editButton attributedTitle]];
+    NSRange titleRange = NSMakeRange(0, [colorTitle length]);
+    [colorTitle addAttribute:NSForegroundColorAttributeName value:color range:titleRange];
+    [_editButton setAttributedTitle:colorTitle];
+    
     [_collectionView reloadData];
     isEditBookList = !isEditBookList;
 }

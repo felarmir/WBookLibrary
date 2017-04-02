@@ -32,4 +32,7 @@
 -(BOOL)addPagePositinByName:(NSString*)bookName page:(int)page;
 -(int)getPagePositin:(NSString*)bookName;
 
+-(BOOL)addMarkByBookName:(NSString*)name page:(int)page text:(NSString*)text colorRed:(float)red colorGreen:(float)green colorBlue:(float)blue;
+-(NSArray*)marksArrayByBookName:(NSString*)name;
+
 @end

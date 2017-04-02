@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AppSettings" representedClassName="AppSettings" syncable="YES">
         <attribute name="bookLibPath" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -11,9 +11,18 @@
         <attribute name="bookName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pagePosition" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="PDFMarks" representedClassName="PDFMarks" syncable="YES">
+        <attribute name="bookName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="c_blue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="c_green" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="c_red" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="page" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="AppSettings" positionX="-54" positionY="9" width="128" height="60"/>
         <element name="BookList" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="PagePositin" positionX="-54" positionY="0" width="128" height="75"/>
+        <element name="PDFMarks" positionX="-54" positionY="9" width="128" height="135"/>
     </elements>
 </model>

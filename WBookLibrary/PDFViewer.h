@@ -10,10 +10,14 @@
 #import <Quartz/Quartz.h>
 @interface PDFViewer : NSViewController
 
+@property (weak) IBOutlet NSColorWell *markColor;
+
+
 @property (weak) IBOutlet PDFView *pdfView;
 @property (weak) IBOutlet NSSplitView *splitView;
-@property (weak) IBOutlet NSView *rightView;
 
 @property (nonatomic, strong) NSString *bookURL;
+
+- (IBAction)markText:(id)sender;
 
 @end

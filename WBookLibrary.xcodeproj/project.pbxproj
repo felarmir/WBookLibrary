@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C30688E51E90FB14007EC7B8 /* PDFMarks+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C30688E21E90FB14007EC7B8 /* PDFMarks+CoreDataClass.m */; };
+		C30688E61E90FB14007EC7B8 /* PDFMarks+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C30688E41E90FB14007EC7B8 /* PDFMarks+CoreDataProperties.m */; };
 		C31F33A81E603AA00059DBA3 /* PDFViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33A71E603AA00059DBA3 /* PDFViewer.m */; };
 		C31F33AB1E6048BB0059DBA3 /* UserPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33AA1E6048BB0059DBA3 /* UserPreference.m */; };
 		C31F33AE1E61721F0059DBA3 /* DataConfigLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C31F33AD1E61721F0059DBA3 /* DataConfigLoader.m */; };
@@ -42,6 +44,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C30688E11E90FB14007EC7B8 /* PDFMarks+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PDFMarks+CoreDataClass.h"; sourceTree = "<group>"; };
+		C30688E21E90FB14007EC7B8 /* PDFMarks+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PDFMarks+CoreDataClass.m"; sourceTree = "<group>"; };
+		C30688E31E90FB14007EC7B8 /* PDFMarks+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PDFMarks+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C30688E41E90FB14007EC7B8 /* PDFMarks+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PDFMarks+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C31F33A61E603AA00059DBA3 /* PDFViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFViewer.h; sourceTree = "<group>"; };
 		C31F33A71E603AA00059DBA3 /* PDFViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFViewer.m; sourceTree = "<group>"; };
 		C31F33A91E6048BB0059DBA3 /* UserPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreference.h; sourceTree = "<group>"; };
@@ -163,6 +169,10 @@
 		C3EF0ED81E5B67AD002917F7 /* WBookLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C30688E11E90FB14007EC7B8 /* PDFMarks+CoreDataClass.h */,
+				C30688E21E90FB14007EC7B8 /* PDFMarks+CoreDataClass.m */,
+				C30688E31E90FB14007EC7B8 /* PDFMarks+CoreDataProperties.h */,
+				C30688E41E90FB14007EC7B8 /* PDFMarks+CoreDataProperties.m */,
 				C3AB081A1E7696E700A8ADEE /* AppSettings+CoreDataClass.h */,
 				C3AB081B1E7696E700A8ADEE /* AppSettings+CoreDataClass.m */,
 				C3AB081C1E7696E700A8ADEE /* AppSettings+CoreDataProperties.h */,
@@ -299,11 +309,13 @@
 				C3EF0EE41E5B67AE002917F7 /* WBookLibrary.xcdatamodeld in Sources */,
 				C393D5BF1E66F3600010F82D /* SSZipArchive.m in Sources */,
 				C38907F51E64430700956D14 /* BookItemView.m in Sources */,
+				C30688E61E90FB14007EC7B8 /* PDFMarks+CoreDataProperties.m in Sources */,
 				C327D5701E70795300F60B49 /* ToolBarHandlers.m in Sources */,
 				C3EF0EDE1E5B67AE002917F7 /* main.m in Sources */,
 				C3AB08271E7696E700A8ADEE /* BookList+CoreDataClass.m in Sources */,
 				C31F33A81E603AA00059DBA3 /* PDFViewer.m in Sources */,
 				C359119B1E66F6C70093C648 /* zip.c in Sources */,
+				C30688E51E90FB14007EC7B8 /* PDFMarks+CoreDataClass.m in Sources */,
 				C3AB08251E7696E700A8ADEE /* AppSettings+CoreDataClass.m in Sources */,
 				C35911981E66F6C70093C648 /* ioapi.c in Sources */,
 				C3AB08281E7696E700A8ADEE /* BookList+CoreDataProperties.m in Sources */,

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="11762"/>
-        <plugIn identifier="com.apple.pdfkit.ibplugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="12118"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="12118"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -211,7 +211,7 @@
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="WBook Library Catalog" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="608" y="440" width="485" height="330"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -246,14 +246,14 @@
                                                 <size key="headerReferenceSize" width="0.0" height="40"/>
                                                 <edgeInsets key="sectionInset" left="20" right="20" top="20" bottom="10"/>
                                             </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="primaryBackgroundColor" red="0.15225559488610602" green="0.16953439715376459" blue="0.17318369289340096" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="XfG-lQ-9wD" id="LhL-Zc-Dsl"/>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="JIf-lg-o8R"/>
                                             </connections>
                                         </collectionView>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.18632552250000001" green="0.20005524420000001" blue="0.2262650698" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.23817162429051103" green="0.25516375369105121" blue="0.29072810913705582" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
                                 <edgeInsets key="contentInsets" left="0.0" right="0.0" top="30" bottom="0.0"/>
                                 <edgeInsets key="scrollerInsets" left="0.0" right="0.0" top="30" bottom="0.0"/>
@@ -261,7 +261,7 @@
                                     <rect key="frame" x="1" y="627" width="484" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.5" horizontal="NO" id="YY4-1i-9Sn">
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="YY4-1i-9Sn">
                                     <rect key="frame" x="470" y="60" width="16" height="315"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -337,7 +337,7 @@
                                     <rect key="frame" x="2" y="2" width="337" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1P-zi-xLe">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1P-zi-xLe">
                                             <rect key="frame" x="8" y="-3" width="320" height="47"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="FVP-dU-05o">
@@ -389,18 +389,18 @@
             <objects>
                 <viewController storyboardIdentifier="PDFViewer" id="S5Z-pu-73S" customClass="PDFViewer" sceneMemberID="viewController">
                     <view key="view" id="UNS-YS-RqZ">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="290"/>
+                        <rect key="frame" x="0.0" y="0.0" width="519" height="429"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uv8-yU-V9B">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="290"/>
+                                <rect key="frame" x="0.0" y="0.0" width="519" height="429"/>
                                 <subviews>
                                     <customView id="UdM-tx-tRf">
-                                        <rect key="frame" x="0.0" y="0.0" width="316" height="290"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="318" height="429"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <pdfView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81C-Dz-8PV">
-                                                <rect key="frame" x="0.0" y="0.0" width="316" height="290"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="318" height="429"/>
                                             </pdfView>
                                         </subviews>
                                         <constraints>
@@ -410,9 +410,49 @@
                                             <constraint firstAttribute="bottom" secondItem="81C-Dz-8PV" secondAttribute="bottom" id="w97-Tu-QQR"/>
                                         </constraints>
                                     </customView>
-                                    <customView fixedFrame="YES" id="4Zv-aM-p9V">
-                                        <rect key="frame" x="317" y="0.0" width="133" height="290"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                    <customView canDrawConcurrently="YES" id="T6s-Je-dFX">
+                                        <rect key="frame" x="319" y="0.0" width="200" height="429"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="en0-H2-uPT">
+                                                <rect key="frame" x="52" y="366" width="128" height="23"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="23" id="Ohh-Pg-v8E"/>
+                                                </constraints>
+                                                <color key="color" red="0.54351127618279749" green="1" blue="0.5400541722837946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </colorWell>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSo-tO-9fE">
+                                                <rect key="frame" x="5" y="369" width="41" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Color:" id="ggh-gC-PUA">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sk7-M6-Edb">
+                                                <rect key="frame" x="1" y="333" width="185" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="2kx-58-yOL"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="push" title="Highlight" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bTR-Yx-u60">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="markText:" target="S5Z-pu-73S" id="EIu-DK-gVm"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="en0-H2-uPT" firstAttribute="leading" secondItem="lSo-tO-9fE" secondAttribute="trailing" constant="8" id="0DC-jn-Eis"/>
+                                            <constraint firstItem="en0-H2-uPT" firstAttribute="top" secondItem="T6s-Je-dFX" secondAttribute="top" constant="40" id="KQM-Lz-OGf"/>
+                                            <constraint firstItem="lSo-tO-9fE" firstAttribute="top" secondItem="T6s-Je-dFX" secondAttribute="top" constant="43" id="PAp-88-YLc"/>
+                                            <constraint firstItem="lSo-tO-9fE" firstAttribute="leading" secondItem="T6s-Je-dFX" secondAttribute="leading" constant="7" id="QPi-Pc-nyg"/>
+                                            <constraint firstAttribute="trailing" secondItem="en0-H2-uPT" secondAttribute="trailing" constant="20" id="Vj2-zO-HvL"/>
+                                            <constraint firstAttribute="trailing" secondItem="sk7-M6-Edb" secondAttribute="trailing" constant="20" id="izM-Hk-Jx8"/>
+                                            <constraint firstItem="sk7-M6-Edb" firstAttribute="leading" secondItem="T6s-Je-dFX" secondAttribute="leading" constant="7" id="kNW-Kc-FuA"/>
+                                            <constraint firstItem="sk7-M6-Edb" firstAttribute="top" secondItem="en0-H2-uPT" secondAttribute="bottom" constant="5" id="yF1-51-qCm"/>
+                                        </constraints>
                                     </customView>
                                 </subviews>
                                 <holdingPriorities>
@@ -429,14 +469,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="markColor" destination="en0-H2-uPT" id="NjW-VY-qY0"/>
                         <outlet property="pdfView" destination="81C-Dz-8PV" id="LYd-bM-xgg"/>
-                        <outlet property="rightView" destination="4Zv-aM-p9V" id="cSk-4O-z00"/>
                         <outlet property="splitView" destination="Uv8-yU-V9B" id="rMZ-Pn-MPB"/>
                     </connections>
                 </viewController>
                 <customObject id="lm0-WM-Ep2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-115" y="1027"/>
+            <point key="canvasLocation" x="-131.5" y="1096.5"/>
         </scene>
         <!--Pub View Controller-->
         <scene sceneID="OCj-OH-crk">

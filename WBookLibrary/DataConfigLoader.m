@@ -11,6 +11,7 @@
 #import "BookList+CoreDataProperties.h"
 #import "AppSettings+CoreDataProperties.h"
 #import "PagePositin+CoreDataProperties.h"
+#import "PDFMarks+CoreDataProperties.m"
 
 
 #define WINDOW_HEIGHT @"windowheight"
@@ -203,7 +204,54 @@
     return [[self checkBookPagePositin:bookName] pagePosition];
 }
 
+
+
+
+/**
+ Add mark text
+
+ @param name Book name
+ @param page page there text
+ @param text mark text
+ @param red Red color float value
+ @param green Green color float value
+ @param blue Blue color float value
+ @return Boolean
+ */
+-(BOOL)addMarkByBookName:(NSString*)name page:(int)page text:(NSString*)text colorRed:(float)red colorGreen:(float)green colorBlue:(float)blue {
+    PDFMarks *pdfmark = [NSEntityDescription insertNewObjectForEntityForName:@"PDFMarks" inManagedObjectContext:[appDelegate managedObjectContext]];
+    pdfmark.bookName = name;
+    pdfmark.text = text;
+    pdfmark.page = page;
+    pdfmark.c_red = red;
+    pdfmark.c_green = green;
+    pdfmark.c_blue = blue;
+    
+    NSError *error;
+    [[pdfmark managedObjectContext] save:&error];
+    if (error) {
+        return NO;
+    }
+    return YES;
+}
+
+-(NSArray*)marksArrayByBookName:(NSString*)name {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    fetchRequest.entity = [NSEntityDescription entityForName:@"PDFMarks" inManagedObjectContext:[appDelegate managedObjectContext]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bookName == %@", name];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *data = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    if(error) {
+        NSLog(@"Error get data");
+        return nil;
+    }
+    return data;
+}
+
 //=================================================================================
+
 
 -(void)setWindowSize:(CGSize)windowSize {
     [_userDefaults setFloat:windowSize.height forKey:WINDOW_HEIGHT];
