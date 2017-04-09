@@ -12,7 +12,6 @@
 @implementation LibraryViewWithDragAndDrop
 {
     BOOL highlight;
-    NSString *curFile;
     NSString *dstFile;
     NSTimer *timer;
     int curFileSize;
@@ -51,25 +50,23 @@
 
 -(void)concludeDragOperation:(id<NSDraggingInfo>)sender {
     NSArray *dragFile = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-    curFile = [dragFile objectAtIndex:0];
-    dstFile = [NSString stringWithFormat:@"%@/%@", [[DataConfigLoader singleInstance] getBookPath], [curFile lastPathComponent]];
-    curFileSize = [[[[NSFileManager defaultManager] attributesOfItemAtPath:curFile error:nil] objectForKey:@"NSFileSize"] intValue];
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(checkFile) userInfo:nil repeats:YES];
-    
-    if ([[NSFileManager defaultManager] isReadableFileAtPath:curFile]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [[NSFileManager defaultManager] copyItemAtPath:curFile toPath:dstFile error:nil];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (_delegate && [_delegate respondsToSelector:@selector(finishBookLoad)]) {
-                    [_delegate performSelector:@selector(finishBookLoad)];
-                    [timer invalidate];
-                    timer = nil;
-                    curFile = nil;
-                    dstFile = nil;
-                }
+    for(NSString *curFile in dragFile) {
+        dstFile = [NSString stringWithFormat:@"%@/%@", [[DataConfigLoader singleInstance] getBookPath], [curFile lastPathComponent]];
+        curFileSize = [[[[NSFileManager defaultManager] attributesOfItemAtPath:curFile error:nil] objectForKey:@"NSFileSize"] intValue];
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(checkFile) userInfo:nil repeats:YES];
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:curFile]) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [[NSFileManager defaultManager] copyItemAtPath:curFile toPath:dstFile error:nil];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (_delegate && [_delegate respondsToSelector:@selector(finishBookLoad)]) {
+                        [_delegate performSelector:@selector(finishBookLoad)];
+                        [timer invalidate];
+                        timer = nil;
+                        dstFile = nil;
+                    }
+                });
             });
-        });
+        }
     }
     
 }
