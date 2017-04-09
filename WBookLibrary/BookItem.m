@@ -37,6 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [_groupBox setButtonBordered:NO];
 }
 
 -(void)setBookEditMode:(BOOL)isEdit {

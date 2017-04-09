@@ -8,13 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
-@interface PDFViewer : NSViewController
+@interface PDFViewer : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
 
 @property (weak) IBOutlet NSColorWell *markColor;
 
 
 @property (weak) IBOutlet PDFView *pdfView;
 @property (weak) IBOutlet NSSplitView *splitView;
+@property (weak) IBOutlet NSTableView *tableView;
 
 @property (nonatomic, strong) NSString *bookURL;
 

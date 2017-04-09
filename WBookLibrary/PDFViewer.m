@@ -23,7 +23,10 @@
     ToolBarHandlers *toolHandlers;
     NSArray<NSToolbarItem*> *toolBarItems;
     NSMutableArray<PDFSelection*> *selectionText;
+    NSArray *markData;
     BOOL isShowTools;
+    NSTextField *pageField;
+    NSString *bookInfo;
 }
 
 
@@ -54,6 +57,7 @@
     [_pdfView setAutoScales:YES];
     PDFPage *page = [pdfDoc pageAtIndex:[[DataConfigLoader singleInstance] getPagePositin:[_bookURL lastPathComponent]]];
     [_pdfView goToPage:page];
+    bookInfo = [NSString stringWithFormat:@"Page:%@ of %lu", [page label], [pdfDoc pageCount]];
 
     NSToolbar *toolBar = [[NSToolbar alloc] initWithIdentifier:@"PDFViewToolBar"];
     [toolBar setDelegate:self];
@@ -70,9 +74,9 @@
 }
 
 -(void)highlightedLoad {
-    NSArray *data = [[DataConfigLoader singleInstance] marksArrayByBookName:[_bookURL lastPathComponent]];
-    if ([data count] > 0) {
-        for (PDFMarks *mark in data) {
+    markData = [[DataConfigLoader singleInstance] marksArrayByBookName:[_bookURL lastPathComponent]];
+    if ([markData count] > 0) {
+        for (PDFMarks *mark in markData) {
             PDFSelection *select = [pdfDoc findString:mark.text withOptions:NSCaseInsensitiveSearch][0];
             select.color = [NSColor colorWithRed:mark.c_red green:mark.c_green blue:mark.c_blue alpha:1.0];
             [selectionText addObject:select];
@@ -88,6 +92,8 @@
 
 -(void)scrollDocument {
     [[DataConfigLoader singleInstance] addPagePositinByName:[_bookURL lastPathComponent] page:(int)[[_pdfView document] indexForPage:[_pdfView currentPage]]];
+    bookInfo = [NSString stringWithFormat:@"Page:%@ of %lu", [[_pdfView currentPage] label], [pdfDoc pageCount]];
+    pageField.stringValue = bookInfo;
 }
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:
@@ -141,15 +147,32 @@
         [newItem setLabel:@"Tools"];
         [newItem setPaletteLabel:@"Tools"];
         
+    } else if([itemIdentifier isEqualToString:@"page"]){
+        newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+        
+        pageField = [[NSTextField alloc] init];
+        pageField.stringValue = bookInfo;
+        [pageField setEditable:NO];
+        [pageField setBordered:NO];
+        [[pageField layer] setBackgroundColor:[[NSColor clearColor] CGColor]];
+        [pageField setBackgroundColor:[NSColor clearColor]];
+        [pageField setAlignment:NSTextAlignmentCenter];
+        [newItem setView:pageField];
+        [newItem setMaxSize:NSMakeSize(120, 20)];
     }
     
-    [btn setImageScaling:NSImageScaleAxesIndependently];
-    [newItem setView:btn];
-    [btn setBezelStyle:NSRegularSquareBezelStyle];
-    [btn setFrame:NSMakeRect(0, 0, 32, 32)];
+    if([itemIdentifier isEqualToString:@"page"] == NO) {
+        [btn setImageScaling:NSImageScaleAxesIndependently];
+        [btn setBordered:NO];
+        [[btn layer] setBackgroundColor:[[NSColor clearColor] CGColor]];
+        [newItem setView:btn];
+        [btn setBezelStyle:NSRegularSquareBezelStyle];
+        [btn setFrame:NSMakeRect(0, 0, 26, 26)];
     
-    NSSize minSize = NSMakeSize(32, 32);
-    [newItem setMaxSize:minSize];
+        NSSize minSize = NSMakeSize(26, 26);
+        [newItem setMaxSize:minSize];
+    }
+    
     return newItem;
 }
 
@@ -158,6 +181,8 @@
 {
     return [NSArray arrayWithObjects:@"Library",
             NSToolbarFlexibleSpaceItemIdentifier,
+            @"page",
+            NSToolbarFlexibleSpaceItemIdentifier,
             @"ZoomIn", @"ZoomOut",
             @"OnePage", @"TwoPage", @"Tools", nil];
 }
@@ -165,6 +190,8 @@
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:@"Library",
+            NSToolbarFlexibleSpaceItemIdentifier,
+            @"page",
             NSToolbarFlexibleSpaceItemIdentifier,
             @"ZoomIn", @"ZoomOut",
             @"OnePage", @"TwoPage", @"Tools", nil];
@@ -209,7 +236,7 @@
     NSView *right = [[[self splitView] subviews] objectAtIndex:1];
     NSView *left  = [[[self splitView] subviews] objectAtIndex:0];
     NSRect leftFrame = [left frame];
-    NSRect overallFrame = [[self splitView] frame]; //???
+    NSRect overallFrame = [[self splitView] frame];
     [right setHidden:YES];
     [left setFrameSize:NSMakeSize(overallFrame.size.width,leftFrame.size.height)];
     [[self splitView] display];
@@ -264,5 +291,29 @@
 -(CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex {
     return self.view.bounds.size.width - 200;;
 }
+
+#pragma mark TableView
+
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return [markData count];
+}
+
+-(NSView*)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    static NSString *IDENT = @"MarkCell";
+    PDFMarks *mark = [markData objectAtIndex:row];
+    NSTableCellView *cell = [tableView makeViewWithIdentifier:IDENT owner:nil];
+    cell.textField.stringValue = [mark text];
+    [[cell layer] setBackgroundColor:[[NSColor colorWithRed:mark.c_red
+                                                      green:mark.c_green
+                                                       blue:mark.c_blue
+                                                      alpha:1.0] CGColor]];
+
+    return cell;
+}
+
+-(CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    return 50.0;
+}
+
 
 @end

@@ -31,11 +31,11 @@
                     </textFieldCell>
                 </textField>
                 <comboBox verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D3a-2M-W5c">
-                    <rect key="frame" x="7" y="79" width="129" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" bezelStyle="round" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="K8l-sw-cgC">
+                    <rect key="frame" x="0.0" y="-2" width="142" height="26"/>
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="Clean" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="K8l-sw-cgC">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" red="0.26595473021742283" green="0.51166690366982892" blue="0.60261342005076135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </comboBoxCell>
                     <connections>
                         <outlet property="dataSource" destination="-2" id="3i4-bI-Jte"/>
@@ -44,13 +44,12 @@
                 </comboBox>
             </subviews>
             <constraints>
-                <constraint firstItem="D3a-2M-W5c" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="0xZ-b7-w6K"/>
                 <constraint firstItem="62N-yM-oHX" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="7" id="5dq-8E-hDW"/>
                 <constraint firstItem="62N-yM-oHX" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="6aR-od-kAS"/>
-                <constraint firstItem="D3a-2M-W5c" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="H0L-oV-ecp"/>
-                <constraint firstAttribute="trailing" secondItem="D3a-2M-W5c" secondAttribute="trailing" constant="7" id="NHW-8s-q8s"/>
-                <constraint firstItem="D3a-2M-W5c" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="SRA-MY-MWc"/>
+                <constraint firstItem="D3a-2M-W5c" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="SRA-MY-MWc"/>
+                <constraint firstAttribute="trailing" secondItem="D3a-2M-W5c" secondAttribute="trailing" constant="1" id="ePZ-qT-RRb"/>
                 <constraint firstAttribute="trailing" secondItem="62N-yM-oHX" secondAttribute="trailing" constant="7" id="fUV-GO-Znm"/>
+                <constraint firstAttribute="bottom" secondItem="D3a-2M-W5c" secondAttribute="bottom" constant="2" id="quJ-jH-Wfh"/>
             </constraints>
             <point key="canvasLocation" x="-340" y="-172.5"/>
         </customView>
